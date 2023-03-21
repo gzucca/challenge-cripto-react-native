@@ -8,7 +8,7 @@ const CryptCard = (Props: Props) => {
 
   let percentageChange = (percentNumber: number) => {
     let roundNumber = ((Math.round(percentNumber + Number.EPSILON) * 100) / 100)
-    gitgi
+    
   }
 
 
