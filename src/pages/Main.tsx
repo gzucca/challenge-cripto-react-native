@@ -1,10 +1,13 @@
-import {StyleSheet, Text, View, Image, ScrollView, FlatList} from 'react-native';
+import {StyleSheet, Text, View, Image, ScrollView, TouchableHighlight} from 'react-native';
 import React from 'react';
 import CryptCard from '../components/CryptCard';
 
 type Props = {};
 
 const Main = (props: Props) => {
+
+  const onPress = () => console.log('Click');
+
   return (
 
     <View>
@@ -16,8 +19,13 @@ const Main = (props: Props) => {
             source={require('../../assets/profilePhoto.jpeg')}></Image>
         </View>
       </View>
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <CryptCard></CryptCard>
+        <TouchableHighlight onPress={onPress} underlayColor='grey'>
+          <View style={styles.button}>
+            <Text> + Add a Cryptocurrency </Text>
+          </View>
+        </TouchableHighlight>
       </ScrollView>
     </View>
   );
@@ -26,22 +34,6 @@ const Main = (props: Props) => {
 export default Main;
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
   header: {
     paddingVertical: 40,
     backgroundColor: '#385775',
@@ -56,6 +48,13 @@ const styles = StyleSheet.create({
     // borderColor: 'red',
     // borderWidth: 1,
   },
+  scrollView: {
+    width: '90%',
+    display: 'flex',
+    alignSelf: 'center',
+    // borderColor: 'red',
+    // borderWidth: 1,
+  },
   headerProfile: {
     width: 50,
     height: 50,
@@ -65,5 +64,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     fontFamily: 'Inter-Medium',
+  },
+  button: {
+    alignItems: 'center',
+    padding: 10,
   },
 });
