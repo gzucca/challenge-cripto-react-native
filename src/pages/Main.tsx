@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, Image, ScrollView, TouchableHighlight} from 'react-native';
 import React from 'react';
-
+import CryptCard from '../components/CryptCard';
 
 type Props = {};
 
@@ -20,7 +20,7 @@ const Main = (props: Props) => {
         </View>
       </View>
       <ScrollView style={styles.scrollView}>
-
+        <CryptCard></CryptCard>
         <TouchableHighlight onPress={onPress} underlayColor='grey'>
           <View style={styles.button}>
             <Text> + Add a Cryptocurrency </Text>
