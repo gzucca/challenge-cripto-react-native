@@ -31,29 +31,27 @@ const CryptCard = (Props: Props) => {
   };
 
   return (
-    <View>
-      <View key={crypto.data.id} style={styles.container}>
-        <View style={[styles.col, styles.leftCol]}>
-          <Image
-            style={styles.image}
-            source={require('../../assets/image.png')}></Image>
-          <View style={[styles.colsText, styles.leftColText]}>
-            <Text style={styles.text}>{crypto.data.name}</Text>
-            <Text style={styles.text}>{crypto.data.symbol}</Text>
-          </View>
+    <View key={crypto.data.id} style={styles.container}>
+      <View style={[styles.col, styles.leftCol]}>
+        <Image
+          style={styles.image}
+          source={require('../../assets/image.png')}></Image>
+        <View style={[styles.colsText, styles.leftColText]}>
+          <Text style={styles.text}>{crypto.data.name}</Text>
+          <Text style={styles.text}>{crypto.data.symbol}</Text>
         </View>
-        <View style={[styles.col, styles.rightCol]}>
-          <View style={[styles.colsText, styles.rightColText]}>
-            <Text style={styles.text}>
-              $
-              {Math.round(
-                (crypto.data.market_data.price_usd + Number.EPSILON) * 100,
-              ) / 100}
-            </Text>
-            {percentageChange(
-              crypto.data.market_data.percent_change_usd_last_24_hours,
-            )}
-          </View>
+      </View>
+      <View style={[styles.col, styles.rightCol]}>
+        <View style={[styles.colsText, styles.rightColText]}>
+          <Text style={styles.text}>
+            $
+            {Math.round(
+              (crypto.data.market_data.price_usd + Number.EPSILON) * 100,
+            ) / 100}
+          </Text>
+          {percentageChange(
+            crypto.data.market_data.percent_change_usd_last_24_hours,
+          )}
         </View>
       </View>
     </View>

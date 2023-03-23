@@ -1,12 +1,16 @@
 import {StyleSheet, Text, View, Image, ScrollView, TouchableHighlight} from 'react-native';
-import React from 'react';
-import CryptCard from '../components/CryptCard';
+import React, { useState } from 'react';
+import CryptCards from '../components/CryptCards';
 
 type Props = {};
 
 const Main = (props: Props) => {
 
-  const onPress = () => console.log('Click');
+  const [open, setOpen] = useState(false)
+
+  const toggleCards = () => {
+    setOpen(!open)
+  }
 
   return (
 
@@ -20,8 +24,8 @@ const Main = (props: Props) => {
         </View>
       </View>
       <ScrollView style={styles.scrollView}>
-        <CryptCard></CryptCard>
-        <TouchableHighlight onPress={onPress} underlayColor='grey'>
+        {open? <CryptCards></CryptCards> : <Text style={styles.warnText}>No Cryptocurrency loaded</Text>}
+        <TouchableHighlight onPress={toggleCards} underlayColor='grey'>
           <View style={styles.button}>
             <Text> + Add a Cryptocurrency </Text>
           </View>
@@ -69,4 +73,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
   },
+  warnText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#ff6666',
+    fontStyle: 'italic',
+    textAlign: 'center',
+    paddingVertical: 30,
+  }
 });
