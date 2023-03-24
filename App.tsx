@@ -16,12 +16,15 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { Provider } from "react-redux";
+import {store} from "./src/redux/store";
 
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
 import Main from './src/pages/Main';
+import Search from './src/pages/Search';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -30,26 +33,28 @@ type SectionProps = PropsWithChildren<{
 function Section({children, title}: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+
+      <View style={styles.sectionContainer}>
+        <Text
+          style={[
+            styles.sectionTitle,
+            {
+              color: isDarkMode ? Colors.white : Colors.black,
+            },
+          ]}>
+          {title}
+        </Text>
+        <Text
+          style={[
+            styles.sectionDescription,
+            {
+              color: isDarkMode ? Colors.light : Colors.dark,
+            },
+          ]}>
+          {children}
+        </Text>
+      </View>
+
   );
 }
 
@@ -61,15 +66,18 @@ function App(): JSX.Element {
   };
 
   return (
+    <Provider store={store}>
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
     <View style={styles.body}>
-      <Main></Main>
+      {/* <Main></Main> */}
+      <Search></Search>
     </View>
     </SafeAreaView>
+    </Provider>
   );
 }
 
