@@ -19,6 +19,14 @@ const CryptCard = () => {
       Math.round((percentNumber + Number.EPSILON) * 100) / 100;
     const negative = roundNumber < 0;
 
+    // const roundNumber = useMemo(() => {
+    //   return Math.round((percentNumber + Number.EPSILON) * 100) / 100
+    // }, [percentNumber])
+
+    // const negative = useMemo(() => {
+    //   return roundNumber < 0
+    // }, [roundNumber])
+
     return (
       <PercentChangeView>
         <PercentChangeArrow
@@ -34,33 +42,37 @@ const CryptCard = () => {
     );
   };
 
-  const memoPercentageChange = useMemo(() => {
-    return percentageChange(
-      crypto.data.market_data.percent_change_usd_last_24_hours,
-    );
-  }, [crypto.data.market_data.percent_change_usd_last_24_hours]);
+  const memoCryptoPrice = useMemo(
+    () =>
+      Math.round((crypto.data.market_data.price_usd + Number.EPSILON) * 100) /
+      100,
+    [crypto.data.market_data.price_usd],
+  );
+
+  const memoPercentageChange = useMemo(
+    () =>
+      percentageChange(
+        crypto.data.market_data.percent_change_usd_last_24_hours,
+      ),
+    [crypto.data.market_data.percent_change_usd_last_24_hours],
+  );
 
   return (
-      <ContainerView key={crypto.data.id}>
-        <ColView>
-          <CryptImage source={require('../../../assets/image.png')}></CryptImage>
-          <LeftColTextView>
-            <ThemedText>{crypto.data.name}</ThemedText>
-            <ThemedText>{crypto.data.symbol}</ThemedText>
-          </LeftColTextView>
-        </ColView>
-        <ColView>
-          <RightColTextView>
-            <ThemedText>
-              $
-              {Math.round(
-                (crypto.data.market_data.price_usd + Number.EPSILON) * 100,
-              ) / 100}
-            </ThemedText>
-            {memoPercentageChange}
-          </RightColTextView>
-        </ColView>
-      </ContainerView>
+    <ContainerView key={crypto.data.id}>
+      <ColView>
+        <CryptImage source={require('../../../assets/image.png')}></CryptImage>
+        <LeftColTextView>
+          <ThemedText>{crypto.data.name}</ThemedText>
+          <ThemedText>{crypto.data.symbol}</ThemedText>
+        </LeftColTextView>
+      </ColView>
+      <ColView>
+        <RightColTextView>
+          <ThemedText>${memoCryptoPrice}</ThemedText>
+          {memoPercentageChange}
+        </RightColTextView>
+      </ColView>
+    </ContainerView>
   );
 };
 

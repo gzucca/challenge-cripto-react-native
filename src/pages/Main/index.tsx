@@ -22,7 +22,7 @@ const Main = () => {
   const [open, setOpen] = useState(false);
 
   const toggleCards = () => {
-    setOpen(!open);
+    setOpen((open) => !open);
   };
 
   return (
