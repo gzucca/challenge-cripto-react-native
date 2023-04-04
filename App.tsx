@@ -6,39 +6,26 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import Main from './src/pages/Main/index'
-import {ContentView} from './styles'
+import {ThemeProvider} from 'styled-components/native';
+import {SafeAreaView, StatusBar} from 'react-native';
+import {ContentView} from './styles';
+import {lightTheme, darkTheme} from './theme';
+import Main from './src/pages/Main/index';
+import {useColorScheme} from 'react-native';
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const isDarkTheme = useColorScheme() === 'dark'
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ContentView>
-        <Main></Main>
-      </ContentView>
-    </SafeAreaView>
+    <ThemeProvider theme={isDarkTheme? darkTheme : lightTheme }>
+      <SafeAreaView>
+        <StatusBar />
+        <ContentView>
+          <Main></Main>
+        </ContentView>
+      </SafeAreaView>
+    </ThemeProvider>
   );
 }
-
 
 export default App;

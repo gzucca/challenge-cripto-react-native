@@ -30,11 +30,13 @@ export const HeaderText = styled.Text`
   font-size: 20px;
   font-weight: 700;
   font-family: 'Inter-Medium';
+  color: white;
 `;
 
 export const TouchableText = styled.Text`
   align-self: center;
   padding: 10px 0px;
+  color: ${(props) => props.theme.text};
 `;
 
 export const WarnText = styled.Text`

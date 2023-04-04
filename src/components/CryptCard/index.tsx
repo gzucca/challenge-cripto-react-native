@@ -10,6 +10,7 @@ import {
   LeftColTextView,
   RightColTextView,
   CryptImage,
+  ThemedText,
 } from './styles';
 
 const CryptCard = () => {
@@ -33,29 +34,33 @@ const CryptCard = () => {
     );
   };
 
+  const memoPercentageChange = useMemo(() => {
+    return percentageChange(
+      crypto.data.market_data.percent_change_usd_last_24_hours,
+    );
+  }, [crypto.data.market_data.percent_change_usd_last_24_hours]);
+
   return (
-    <ContainerView key={crypto.data.id}>
-      <ColView>
-        <CryptImage source={require('../../../assets/image.png')}></CryptImage>
-        <LeftColTextView>
-          <Text>{crypto.data.name}</Text>
-          <Text>{crypto.data.symbol}</Text>
-        </LeftColTextView>
-      </ColView>
-      <ColView>
-        <RightColTextView>
-          <Text>
-            $
-            {Math.round(
-              (crypto.data.market_data.price_usd + Number.EPSILON) * 100,
-            ) / 100}
-          </Text>
-          {useMemo(() => {
-          return percentageChange(crypto.data.market_data.percent_change_usd_last_24_hours)
-          }, [crypto.data.market_data.percent_change_usd_last_24_hours])}
-        </RightColTextView>
-      </ColView>
-    </ContainerView>
+      <ContainerView key={crypto.data.id}>
+        <ColView>
+          <CryptImage source={require('../../../assets/image.png')}></CryptImage>
+          <LeftColTextView>
+            <ThemedText>{crypto.data.name}</ThemedText>
+            <ThemedText>{crypto.data.symbol}</ThemedText>
+          </LeftColTextView>
+        </ColView>
+        <ColView>
+          <RightColTextView>
+            <ThemedText>
+              $
+              {Math.round(
+                (crypto.data.market_data.price_usd + Number.EPSILON) * 100,
+              ) / 100}
+            </ThemedText>
+            {memoPercentageChange}
+          </RightColTextView>
+        </ColView>
+      </ContainerView>
   );
 };
 

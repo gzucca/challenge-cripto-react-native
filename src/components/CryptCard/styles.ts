@@ -49,3 +49,8 @@ export const CryptImage = styled.Image`
   height: 60px;
   border-radius: 99px;
 `;
+
+export const ThemedText = styled.Text`
+  color: ${(props) => props.theme.text};
+
+`
