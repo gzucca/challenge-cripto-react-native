@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Main from './src/pages/Main/index'
+import {ContentView} from './styles'
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -32,9 +33,9 @@ function App(): JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <View style={{minHeight: "100%"}}>
+      <ContentView>
         <Main></Main>
-      </View>
+      </ContentView>
     </SafeAreaView>
   );
 }
