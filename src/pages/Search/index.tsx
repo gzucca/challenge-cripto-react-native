@@ -6,7 +6,9 @@ import {actionCreators, State} from '../../redux';
 import CryptCard from '../../components/CryptCard';
 import { ContainerView, HeaderView, ListScrollView, TouchableText } from './styles';
 
-const Search = () => {
+
+
+const Search = ({ navigation }) => {
   const dispatch = useDispatch();
   const {getAllCryptos} = bindActionCreators(actionCreators, dispatch);
   const globalState = useSelector((state: State) => state.cryptos);
@@ -18,7 +20,7 @@ const Search = () => {
   return (
     <ContainerView>
             <HeaderView>
-            <TouchableHighlight  underlayColor={'blue'}>
+            <TouchableHighlight onPress={() => navigation.navigate('Home')} underlayColor={'grey'}>
               <TouchableText>{'< Back to list'}</TouchableText>
             </TouchableHighlight>
             </HeaderView>

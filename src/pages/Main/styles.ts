@@ -6,9 +6,8 @@ export const ComponentView = styled.View`
 `;
 
 export const HeaderView = styled.View`
-  padding: 40px 0px;
+  padding: 50px 0px 40px;
   background-color: #385775;
-  
 `;
 
 export const ContainerView = styled.View`
@@ -21,7 +20,7 @@ export const ContainerView = styled.View`
 `;
 
 export const ListScrollView = styled.ScrollView`
-  width: 90%;
+  padding: 0px 10%;
   display: flex;
   align-self: center;
 `;
@@ -41,8 +40,8 @@ export const HeaderText = styled.Text`
 
 export const TouchableText = styled.Text`
   align-self: center;
-  padding: 10px 0px;
-  color: ${(props) => props.theme.text};
+  padding: 6px 8px;
+  color: ${props => props.theme.text};
 `;
 
 export const WarnText = styled.Text`

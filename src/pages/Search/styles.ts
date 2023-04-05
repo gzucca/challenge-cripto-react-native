@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const HeaderView = styled.View`
-  padding: 20px 20px 10px;
+  padding: 50px 20px 20px;
   width: 100%;
   color: ${(props) => props.theme.text};
 `;
@@ -21,4 +21,6 @@ export const ListScrollView = styled.ScrollView`
 
 export const TouchableText = styled.Text`
   color: ${(props) => props.theme.text};
+  font-size: 16px;
+  padding: 6px 8px;
 `;

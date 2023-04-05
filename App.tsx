@@ -3,21 +3,16 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {ThemeProvider} from 'styled-components/native';
 import {SafeAreaView, StatusBar} from 'react-native';
-import {ContentView} from './styles';
 import {lightTheme, darkTheme} from './theme';
 import Main from './src/pages/Main/index';
 import Search from './src/pages/Search/index';
 import {useColorScheme} from 'react-native';
 import {store} from './src/redux/store';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {RootStackParamList} from './types';
 
-type RootStackParamList = {
-  Home: undefined;
-  Search: undefined;
-};
-
-const RootStack = createStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): JSX.Element {
   const isDarkTheme = useColorScheme() === 'dark';
@@ -25,13 +20,27 @@ function App(): JSX.Element {
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <Provider store={store}>
-            <StatusBar />
-            <NavigationContainer>
-              <RootStack.Navigator initialRouteName="Home">
-                <RootStack.Screen name="Home" component={Main} />
-                <RootStack.Screen name="Search" component={Search} />
-              </RootStack.Navigator>
-            </NavigationContainer>
+        <StatusBar />
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerShown: false,
+              statusBarColor: 'transparent',
+              statusBarTranslucent: true,
+            }}>
+            <Stack.Screen
+              name="Home"
+              component={Main}
+              options={{animation: 'slide_from_left'}}
+            />
+            <Stack.Screen
+              name="Search"
+              component={Search}
+              options={{animation: 'slide_from_right'}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
     </ThemeProvider>
   );
