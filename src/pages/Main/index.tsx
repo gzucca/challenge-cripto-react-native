@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   Text,
   View,
   Image,
@@ -9,6 +8,7 @@ import {
 import React, {useState} from 'react';
 import CryptCards from '../../components/CryptCards';
 import {
+  ComponentView,
   ContainerView,
   HeaderImage,
   HeaderText,
@@ -17,8 +17,12 @@ import {
   TouchableText,
   WarnText,
 } from './styles';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Main = () => {
+
+
+const Main = ({ navigation }) => {
   const [open, setOpen] = useState(false);
 
   const toggleCards = () => {
@@ -26,7 +30,7 @@ const Main = () => {
   };
 
   return (
-    <View>
+    <ComponentView>
       <HeaderView>
         <ContainerView>
           <HeaderText>CryptoTracker Pro</HeaderText>
@@ -40,11 +44,11 @@ const Main = () => {
         ) : (
           <WarnText>No Cryptocurrency loaded</WarnText>
         )}
-        <TouchableHighlight onPress={toggleCards} underlayColor={'grey'}>
+        <TouchableHighlight onPress={() => navigation.navigate('Search')} underlayColor={'grey'}>
           <TouchableText>+ Add a Cryptocurrency</TouchableText>
         </TouchableHighlight>
       </ListScrollView>
-    </View>
+    </ComponentView>
   );
 };
 

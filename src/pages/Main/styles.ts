@@ -1,8 +1,14 @@
 import styled from 'styled-components/native';
 
+export const ComponentView = styled.View`
+  background-color: ${props => props.theme.primary};
+  min-height: 100%;
+`;
+
 export const HeaderView = styled.View`
   padding: 40px 0px;
   background-color: #385775;
+  
 `;
 
 export const ContainerView = styled.View`
