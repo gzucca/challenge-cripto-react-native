@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const HeaderView = styled.View`
   padding: 40px 0px;
-  background-color: #385775;
+  background-color: ${({theme}) => theme.blue};
 `;
 
 export const ContainerView = styled.View`
@@ -30,13 +30,13 @@ export const HeaderText = styled.Text`
   font-size: 20px;
   font-weight: 700;
   font-family: 'Inter-Medium';
-  color: white;
+  color: ${({theme}) => theme.text};
 `;
 
 export const TouchableText = styled.Text`
   align-self: center;
   padding: 10px 0px;
-  color: ${(props) => props.theme.text};
+  color: ${({theme}) => theme.text};
 `;
 
 export const WarnText = styled.Text`
