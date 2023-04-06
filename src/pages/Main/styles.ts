@@ -7,7 +7,7 @@ export const ComponentView = styled.View`
 
 export const HeaderView = styled.View`
   padding: 50px 0px 40px;
-  background-color: #385775;
+  background-color: ${({theme}) => theme.blue};
 `;
 
 export const ContainerView = styled.View`
@@ -35,13 +35,13 @@ export const HeaderText = styled.Text`
   font-size: 20px;
   font-weight: 700;
   font-family: 'Inter-Medium';
-  color: white;
+  color: ${({theme}) => theme.text};
 `;
 
 export const TouchableText = styled.Text`
   align-self: center;
   padding: 6px 8px;
-  color: ${props => props.theme.text};
+  color: ${{theme} => theme.text};
 `;
 
 export const WarnText = styled.Text`

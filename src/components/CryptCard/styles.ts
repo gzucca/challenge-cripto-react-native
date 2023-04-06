@@ -10,7 +10,7 @@ export const PercentChangeView = styled.View`
 export const PercentChangeNumber = styled.Text<{
   negative: boolean;
 }>`
-  color: ${props => (props.negative ? 'red' : 'green')};
+  color: ${props => (props.negative ? props.theme.red : props.theme.green)};
 `;
 
 type ContainerProps = {
@@ -25,11 +25,11 @@ export const ContainerView = styled.View<ContainerProps>`
   justify-content: space-between;
   align-self: center;
   padding: 20px 0px;
-  border-color: ${props => (props.onSelect ? 'white' : 'grey')};
+  border-color: ${props => (props.onSelect ? props.theme.yellow : props.theme.grey)};
   border-bottom-width: 1px;
   border-style: solid;
   background-color: ${props =>
-    props.onSelect ? 'rgba(227, 227, 227, 0.2)' : props.theme.primary};
+    props.onSelect ? props.theme.grey : props.theme.primary};
 `;
 
 export const ColView = styled.View`
@@ -57,5 +57,4 @@ export const CryptImage = styled.Image`
 `;
 
 export const ThemedText = styled.Text`
-  color: ${props => props.theme.text};
-`;
+  color: ${({theme}) => theme.text};

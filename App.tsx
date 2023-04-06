@@ -3,7 +3,8 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {ThemeProvider} from 'styled-components/native';
 import {SafeAreaView, StatusBar} from 'react-native';
-import {lightTheme, darkTheme} from './theme';
+
+import {lightTheme, darkTheme} from './src/utils/theme';
 import Main from './src/pages/Main/index';
 import Search from './src/pages/Search/index';
 import {useColorScheme} from 'react-native';
