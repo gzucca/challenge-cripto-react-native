@@ -20,6 +20,7 @@ type Props = {
   change: number;
   id: string;
   symbol: string
+  onSelect: boolean
 };
 
 const CryptCard = (props: Props) => {
@@ -27,6 +28,7 @@ const CryptCard = (props: Props) => {
     const roundNumber =
       Math.round((percentNumber + Number.EPSILON) * 100) / 100;
     const negative = roundNumber < 0;
+
 
     return (
       <PercentChangeView>
@@ -60,7 +62,7 @@ const CryptCard = (props: Props) => {
 
 
   return (
-    <ContainerView key={props.id}>
+    <ContainerView onSelect={props.onSelect} key={props.id}>
       <ColView>
         <CryptImage source={{uri:props.image}}></CryptImage>
         <LeftColTextView>

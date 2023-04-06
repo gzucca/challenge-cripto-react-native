@@ -25,6 +25,10 @@ export const searchCryptos = (payload: string) => {
   return {type: ActionType.SEARCH_CRYPTO, payload: payload};
 };
 
+export const saveCrypto = (payload: string) => {
+  return {type: ActionType.SAVE_CRYPTO, payload: payload};
+};
+
 // export const getAllCryptos = () => {
 // require("got")
 //   .get("https://data.messari.io/api/v2/assets")

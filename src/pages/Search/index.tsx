@@ -24,15 +24,16 @@ const Search = ({route, navigation}: Props) => {
   const dispatch = useDispatch();
   const {getAllCryptos} = bindActionCreators(actionCreators, dispatch);
   const {searchCryptos} = bindActionCreators(actionCreators, dispatch);
+  const {saveCrypto} = bindActionCreators(actionCreators, dispatch);
   const globalState = useSelector((state: State) => state.cryptos);
-  const [search, setSearch] = useState('');
+  const [selected, setSelected] = useState('');
 
-  const searchCrypto = (crypto: string) => {
-    return searchCryptos(crypto);
-  };
 
   useEffect(() => {
     getAllCryptos();
+    return () => {
+      searchCryptos('');
+    };
   }, []);
 
   return (
@@ -49,27 +50,35 @@ const Search = ({route, navigation}: Props) => {
         <AddTextInput
           placeholder="Use a name or ticker symbol..."
           placeholderTextColor="lightgrey"
-          onChangeText={e => setSearch(e)}
+          onChangeText={e => searchCryptos(e)}
         />
-        <AddButton onPress={() => searchCrypto(search)}>
+        <AddButton
+          onPress={() =>
+            saveCrypto(selected)
+          }>
           <ButtonText>Add</ButtonText>
         </AddButton>
       </AddView>
       <ListScrollView>
-        {globalState &&
-          globalState.allCryptos.map(crypto => {
+        {globalState.searchResult &&
+          globalState.searchResult.map((crypto: any) => {
             return (
-              <CryptCard
+              <TouchableHighlight
                 key={crypto.id}
-                id={crypto.id}
-                name={crypto.name}
-                symbol={crypto.symbol}
-                image={`https://asset-images.messari.io/images/${crypto.id}/64.png?v=2`}
-                price={crypto.metrics.market_data.price_usd}
-                change={
-                  crypto.metrics.market_data.percent_change_usd_last_24_hours
-                }
-              />
+                onPress={() => setSelected(crypto.id)}>
+                <CryptCard
+                  key={crypto.id}
+                  id={crypto.id}
+                  name={crypto.name}
+                  symbol={crypto.symbol}
+                  image={`https://asset-images.messari.io/images/${crypto.id}/64.png?v=2`}
+                  price={crypto.metrics.market_data.price_usd}
+                  change={
+                    crypto.metrics.market_data.percent_change_usd_last_24_hours
+                  }
+                  onSelect={crypto.id === selected ? true : false}
+                />
+              </TouchableHighlight>
             );
           })}
       </ListScrollView>

@@ -13,7 +13,11 @@ export const PercentChangeNumber = styled.Text<{
   color: ${props => (props.negative ? 'red' : 'green')};
 `;
 
-export const ContainerView = styled.View`
+type ContainerProps = {
+  onSelect: boolean;
+};
+
+export const ContainerView = styled.View<ContainerProps>`
   width: 100%;
   font-size: 16px;
   display: flex;
@@ -21,9 +25,11 @@ export const ContainerView = styled.View`
   justify-content: space-between;
   align-self: center;
   padding: 20px 0px;
-  border-color: grey;
+  border-color: ${props => (props.onSelect ? 'white' : 'grey')};
   border-bottom-width: 1px;
   border-style: solid;
+  background-color: ${props =>
+    props.onSelect ? 'rgba(227, 227, 227, 0.2)' : props.theme.primary};
 `;
 
 export const ColView = styled.View`
@@ -51,6 +57,5 @@ export const CryptImage = styled.Image`
 `;
 
 export const ThemedText = styled.Text`
-  color: ${(props) => props.theme.text};
-
-`
+  color: ${props => props.theme.text};
+`;

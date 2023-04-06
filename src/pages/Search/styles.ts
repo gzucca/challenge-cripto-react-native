@@ -8,6 +8,7 @@ export const HeaderView = styled.View`
 
 export const ContainerView = styled.View`
   height: 100%;
+  width:100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -26,8 +27,7 @@ export const TouchableText = styled.Text`
 `;
 
 export const AddView = styled.View`
-  padding: 20% 24px;
-  height: 100%;
+  padding: 0px 24px;
 `;
 
 export const AddText = styled.Text`

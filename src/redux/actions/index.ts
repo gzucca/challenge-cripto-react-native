@@ -10,4 +10,9 @@ interface SearchCrypto {
   payload: string,
 }
 
-export type Action = GetAllAction | SearchCrypto
+interface SaveCrypto {
+  type: ActionType.SAVE_CRYPTO,
+  payload: string,
+}
+
+export type Action = GetAllAction | SearchCrypto | SaveCrypto
