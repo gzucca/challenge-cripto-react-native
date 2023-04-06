@@ -2,8 +2,8 @@ import styled from 'styled-components/native';
 
 export const HeaderView = styled.View`
   padding: 50px 20px 20px;
-  width: 100%;
-  color: ${props => props.theme.text};
+  color: ${({theme}) => theme.text};
+  align-self: flex-start;
 `;
 
 export const ContainerView = styled.View`
@@ -13,7 +13,7 @@ export const ContainerView = styled.View`
   flex-direction: column;
   justify-content: space-between;
   align-self: center;
-  background-color: ${props => props.theme.primary};
+  background-color: ${({theme}) => theme.primary};
 `;
 
 export const ListScrollView = styled.ScrollView`
@@ -21,9 +21,10 @@ export const ListScrollView = styled.ScrollView`
 `;
 
 export const TouchableText = styled.Text`
-  color: ${props => props.theme.text};
+  color: ${({theme}) => theme.text};
   font-size: 16px;
   padding: 6px 8px;
+
 `;
 
 export const AddView = styled.View`
@@ -34,20 +35,20 @@ export const AddText = styled.Text`
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 24px;
-  color: ${props => props.theme.text}
+  color: ${({theme}) => theme.text};
 `
 
 export const AddTextInput = styled.TextInput`
   border: 2px solid #fbd24d;
   border-radius: 4px;
-  background-color: #ffffff;
+  background-color: ${({theme}) => theme.primary};
   font-size: 16px;
-  color: black;
+  color: ${({theme}) => theme.text};
   padding: 8px 8px;
 `;
 
 export const AddButton = styled.TouchableOpacity`
-  background-color: #fbd24d;
+  background-color: ${({theme}) => theme.yellow};
   margin-top: 16px;
   padding: 10px;
   width: 100px;
@@ -57,6 +58,6 @@ export const AddButton = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled.Text`
-  color: #385775;
+  color: ${({theme}) => theme.text};
   font-size: 16px;
 `;

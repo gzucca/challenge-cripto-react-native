@@ -57,4 +57,5 @@ export const CryptImage = styled.Image`
 `;
 
 export const ThemedText = styled.Text`
-  color: ${({theme}) => theme.text};
+  color: ${({theme}) => theme.text}
+  `;

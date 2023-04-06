@@ -41,7 +41,7 @@ export const HeaderText = styled.Text`
 export const TouchableText = styled.Text`
   align-self: center;
   padding: 6px 8px;
-  color: ${{theme} => theme.text};
+  color: ${({theme}) => theme.text};
 `;
 
 export const WarnText = styled.Text`
