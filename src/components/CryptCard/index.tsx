@@ -13,23 +13,21 @@ import {
   ThemedText,
 } from './styles';
 
-
 type Props = {
   image: string;
   name: string;
   price: number;
   change: number;
   id: string;
-  symbol: string
-  onSelect: boolean
+  symbol: string;
+  onSelect: boolean;
 };
 
 const CryptCard = (props: Props) => {
   const percentageChange = (percentNumber: number) => {
     const roundNumber = Number(percentNumber.toFixed(2));
     const negative = roundNumber < 0;
-  
-    
+
     return (
       <PercentChangeView>
         <PercentChangeArrow
@@ -37,30 +35,27 @@ const CryptCard = (props: Props) => {
           height={16}
           rotation={negative ? 180 : 0}
           fill={negative ? 'red' : 'green'}
-          />
+        />
         <PercentChangeNumber negative={negative}>
           {(negative ? -roundNumber : roundNumber) + '%'}
         </PercentChangeNumber>
       </PercentChangeView>
     );
   };
-  
+
   const memoCryptoPrice = useMemo(
-    () =>
-      Math.round((props.price + Number.EPSILON) * 100) /
-      100,
+    () => Number(props.price.toFixed(2)),
     [props.price],
   );
-  
+
   const memoPercentageChange = useMemo(
-    () =>
-      percentageChange(props.change),
+    () => percentageChange(props.change),
     [props.change],
   );
   return (
     <ContainerView onSelect={props.onSelect} key={props.id}>
       <ColView>
-        <CryptImage source={{uri:props.image}}></CryptImage>
+        <CryptImage source={{uri: props.image}}></CryptImage>
         <LeftColTextView>
           <ThemedText>{props.name}</ThemedText>
           <ThemedText>{props.symbol}</ThemedText>
