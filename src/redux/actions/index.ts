@@ -5,4 +5,9 @@ interface GetAllAction {
   payload: Array<any>,
 }
 
-export type Action = GetAllAction
+interface SearchCrypto {
+  type: ActionType.SEARCH_CRYPTO,
+  payload: string,
+}
+
+export type Action = GetAllAction | SearchCrypto

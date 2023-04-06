@@ -1,8 +1,8 @@
-import { ActionType } from "../action-types";
-import { Action} from "../actions/index";
-import { Dispatch } from "redux";
-import axios from "axios";
-import json from './../../../apiresponse.json'
+import {ActionType} from '../action-types';
+import {Action} from '../actions/index';
+import {Dispatch} from 'redux';
+import axios from 'axios';
+import json from './../../../apiresponse.json';
 
 export const getAllCryptos = () => {
   return async function (dispatch: Dispatch<Action>) {
@@ -21,6 +21,10 @@ export const getAllCryptos = () => {
   };
 };
 
+export const searchCryptos = (payload: string) => {
+  return {type: ActionType.SEARCH_CRYPTO, payload: payload};
+};
+
 // export const getAllCryptos = () => {
 // require("got")
 //   .get("https://data.messari.io/api/v2/assets")
@@ -29,4 +33,3 @@ export const getAllCryptos = () => {
 //     console.log(response);
 //   })
 //   .catch((err:string) => {console.log("Could not get cryptos from API:", err)});
-
