@@ -9,14 +9,19 @@ import {
   HeaderView,
   ListScrollView,
   TouchableText,
+  TouchableView,
   WarnText,
 } from './styles';
 import {RootStackParamList} from '../../../types';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useSelector} from 'react-redux';
+import {State} from '../../redux';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Main = ({route, navigation}: Props) => {
+  const globalState = useSelector((state: State) => state.cryptos);
+
   return (
     <ComponentView>
       <HeaderView>
@@ -27,12 +32,18 @@ const Main = ({route, navigation}: Props) => {
         </ContainerView>
       </HeaderView>
       <ListScrollView>
-        <WarnText>No Cryptocurrency loaded</WarnText>
-        <TouchableHighlight
-          onPress={() => navigation.navigate('Search')}
-          underlayColor={'grey'}>
-          <TouchableText>+ Add a Cryptocurrency</TouchableText>
-        </TouchableHighlight>
+        {globalState.userCryptos.length > 0 ? (
+          <CryptCards />
+        ) : (
+          <WarnText>No Cryptocurrency loaded</WarnText>
+        )}
+        <TouchableView>
+          <TouchableHighlight
+            onPress={() => navigation.navigate('Search')}
+            underlayColor={'grey'}>
+            <TouchableText>+ Add a Cryptocurrency</TouchableText>
+          </TouchableHighlight>
+        </TouchableView>
       </ListScrollView>
     </ComponentView>
   );

@@ -3,7 +3,7 @@ import React, {useEffect, useMemo} from 'react';
 import crypto from '../../../metrics.json';
 import PercentChangeArrow from '../../../assets/icons/north_east_black_24dp.svg';
 import {
-  ContainerView,
+  ContainerRow,
   PercentChangeNumber,
   PercentChangeView,
   ColView,
@@ -11,6 +11,8 @@ import {
   RightColTextView,
   CryptImage,
   ThemedText,
+  ContainerCol,
+  BackgroundView,
 } from './styles';
 
 type Props = {
@@ -53,21 +55,25 @@ const CryptCard = (props: Props) => {
     [props.change],
   );
   return (
-    <ContainerView onSelect={props.onSelect} key={props.id}>
-      <ColView>
-        <CryptImage source={{uri: props.image}}></CryptImage>
-        <LeftColTextView>
-          <ThemedText>{props.name}</ThemedText>
-          <ThemedText>{props.symbol}</ThemedText>
-        </LeftColTextView>
-      </ColView>
-      <ColView>
-        <RightColTextView>
-          <ThemedText>${memoCryptoPrice}</ThemedText>
-          {memoPercentageChange}
-        </RightColTextView>
-      </ColView>
-    </ContainerView>
+    <BackgroundView>
+      <ContainerCol onSelect={props.onSelect} key={props.id}>
+        <ContainerRow>
+          <ColView>
+            <CryptImage source={{uri: props.image}}></CryptImage>
+            <LeftColTextView>
+              <ThemedText>{props.name}</ThemedText>
+              <ThemedText>{props.symbol}</ThemedText>
+            </LeftColTextView>
+          </ColView>
+          <ColView>
+            <RightColTextView>
+              <ThemedText>${memoCryptoPrice}</ThemedText>
+              {memoPercentageChange}
+            </RightColTextView>
+          </ColView>
+        </ContainerRow>
+      </ContainerCol>
+    </BackgroundView>
   );
 };
 

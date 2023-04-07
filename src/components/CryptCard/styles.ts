@@ -1,5 +1,32 @@
 import styled from 'styled-components/native';
 
+export const BackgroundView = styled.View`
+  width: 100%;
+  background-color: ${({theme})=> theme.primary};
+`;
+
+export const ContainerCol = styled.View<ContainerProps>`
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: center;
+  padding: 20px 10px;
+  width: 90%;
+  border-color: ${props =>
+    props.onSelect ? props.theme.yellow : props.theme.grey};
+  border-bottom-width: 1px;
+  border-style: solid;
+  background-color: ${props =>
+    props.onSelect ? props.theme.grey : props.theme.primary};
+`;
+
+export const ContainerRow = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 export const PercentChangeView = styled.View`
   display: flex;
   flex-direction: row;
@@ -17,25 +44,11 @@ type ContainerProps = {
   onSelect: boolean;
 };
 
-export const ContainerView = styled.View<ContainerProps>`
-  width: 100%;
-  font-size: 16px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-self: center;
-  padding: 20px 0px;
-  border-color: ${props => (props.onSelect ? props.theme.yellow : props.theme.grey)};
-  border-bottom-width: 1px;
-  border-style: solid;
-  background-color: ${props =>
-    props.onSelect ? props.theme.grey : props.theme.primary};
-`;
-
 export const ColView = styled.View`
   display: flex;
   flex-direction: row;
   gap: 10px;
+  align-self: center;
 `;
 
 export const LeftColTextView = styled.View`
@@ -57,5 +70,5 @@ export const CryptImage = styled.Image`
 `;
 
 export const ThemedText = styled.Text`
-  color: ${({theme}) => theme.text}
-  `;
+  color: ${({theme}) => theme.text};
+`;

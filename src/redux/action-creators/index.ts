@@ -6,18 +6,18 @@ import json from './../../../apiresponse.json';
 
 export const getAllCryptos = () => {
   return async function (dispatch: Dispatch<Action>) {
-    try {
-      const json = await axios.get(
-        `https://data.messari.io/api/v2/assets?limit=20`,
-      );
+  //   try {
+  //     const json = await axios.get(
+  //       `https://data.messari.io/api/v2/assets?limit=20`,
+  //     );
       return dispatch({
         type: ActionType.GET_ALL,
-        payload: json.data.data,
-        // payload: json.data,
+        // payload: json.data.data,
+        payload: json.data,
       });
-    } catch (error) {
-      console.log(error);
-    }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
   };
 };
 

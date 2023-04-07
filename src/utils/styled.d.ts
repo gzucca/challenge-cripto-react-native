@@ -11,5 +11,6 @@ declare module 'styled-components/native' {
       red: string;
       blue: string;
       yellow: string;
+      white: string;
   }
 }

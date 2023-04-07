@@ -28,7 +28,6 @@ const Search = ({route, navigation}: Props) => {
   const globalState = useSelector((state: State) => state.cryptos);
   const [selected, setSelected] = useState('');
 
-
   useEffect(() => {
     getAllCryptos();
     return () => {
@@ -52,29 +51,28 @@ const Search = ({route, navigation}: Props) => {
           placeholderTextColor="lightgrey"
           onChangeText={e => searchCryptos(e)}
         />
-        <AddButton
-          onPress={() =>
-            saveCrypto(selected)
-          }>
-          <ButtonText>Add</ButtonText>
+        <AddButton disabled={selected === '' ? true : false} onPress={() => saveCrypto(selected)}>
+          <ButtonText >Add</ButtonText>
         </AddButton>
       </AddView>
       <ListScrollView>
         {globalState.searchResult &&
-          globalState.searchResult.map((crypto: any) => {
+          globalState.searchResult.map((crypto) => {
             return (
               <TouchableHighlight
                 key={crypto.id}
-                onPress={() => setSelected(crypto.id)}>
+                onPress={() =>
+                  selected === crypto.id ? setSelected('') : setSelected(crypto.id)
+                }>
                 <CryptCard
                   key={crypto.id}
                   id={crypto.id}
                   name={crypto.name}
                   symbol={crypto.symbol}
                   image={`https://asset-images.messari.io/images/${crypto.id}/64.png?v=2`}
-                  price={crypto.metrics.market_data.price_usd}
+                  price={crypto.priceUsd}
                   change={
-                    crypto.metrics.market_data.percent_change_usd_last_24_hours
+                    crypto.percentChange24hs
                   }
                   onSelect={crypto.id === selected ? true : false}
                 />

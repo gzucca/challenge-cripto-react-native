@@ -8,7 +8,7 @@ export const HeaderView = styled.View`
 
 export const ContainerView = styled.View`
   height: 100%;
-  width:100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17,14 +17,14 @@ export const ContainerView = styled.View`
 `;
 
 export const ListScrollView = styled.ScrollView`
-  padding: 0px 20px;
+  background-color: ${({theme}) => theme.primary};
+  width: 100%;
 `;
 
 export const TouchableText = styled.Text`
   color: ${({theme}) => theme.text};
   font-size: 16px;
   padding: 6px 8px;
-
 `;
 
 export const AddView = styled.View`
@@ -36,7 +36,7 @@ export const AddText = styled.Text`
   font-weight: 700;
   margin-bottom: 24px;
   color: ${({theme}) => theme.text};
-`
+`;
 
 export const AddTextInput = styled.TextInput`
   border: 2px solid #fbd24d;
@@ -49,7 +49,7 @@ export const AddTextInput = styled.TextInput`
 
 export const AddButton = styled.TouchableOpacity`
   background-color: ${({theme}) => theme.yellow};
-  margin-top: 16px;
+  margin: 16px 0px;
   padding: 10px;
   width: 100px;
   align-items: center;
