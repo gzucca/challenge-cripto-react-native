@@ -1,5 +1,5 @@
 import {TouchableHighlight, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import CryptCards from '../../components/CryptCards';
 import {
   ColumnView,
@@ -20,6 +20,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators, State} from '../../redux';
 import TrashCanDelete from './../../../assets/icons/delete_black_24dp.svg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -28,6 +29,23 @@ const Main = ({route, navigation}: Props) => {
   const [selected, setSelected] = useState('');
   const dispatch = useDispatch();
   const {deleteCrypto} = bindActionCreators(actionCreators, dispatch);
+  const {loadUserCrypto} = bindActionCreators(actionCreators, dispatch);
+
+  const getUserCrypto = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@storageUserCryptos');
+      if (jsonValue !== null) {
+        const storedArray = JSON.parse(jsonValue);
+        storedArray.forEach((crypto: string) => loadUserCrypto(crypto));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getUserCrypto();
+  }, []);
 
   return (
     <ComponentView>

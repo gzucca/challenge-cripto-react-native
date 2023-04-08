@@ -20,4 +20,9 @@ interface DeleteCrytpo {
   payload: string,
 }
 
-export type Action = GetAllAction | SearchCrypto | SaveCrypto | DeleteCrytpo
+interface LoadUserCrypto {
+  type: ActionType.LOAD_USER_CRYPTO,
+  payload: any,
+}
+
+export type Action = GetAllAction | SearchCrypto | SaveCrypto | DeleteCrytpo | LoadUserCrypto
