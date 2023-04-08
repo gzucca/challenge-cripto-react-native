@@ -1,32 +1,21 @@
 import {TouchableHighlight, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React from 'react';
 import CryptCard from '../CryptCard';
 import {ListScrollView} from './styles';
-import {actionCreators, State} from '../../redux';
-import {bindActionCreators} from 'redux';
+import {CryptCardsProps} from '../../../types';
 
-const CryptCards = () => {
-  // const dispatch = useDispatch();
-  const globalState = useSelector((state: State) => state.cryptos);
-  const [selected, setSelected] = useState('');
-  // const {getAllCryptos} = bindActionCreators(actionCreators, dispatch);
-
-  // useEffect(() => {
-  //   getAllCryptos();
-
-  // }, []);
-
-  return (
+const CryptCards = (props: CryptCardsProps) => (
     <View>
       <ListScrollView>
-        {globalState.userCryptos &&
-          globalState.userCryptos.map((crypto) => {
+        {props.cryptosPassed.length > 0 &&
+          props.cryptosPassed.map(crypto => {
             return (
               <TouchableHighlight
                 key={crypto.id}
                 onPress={() =>
-                  selected === crypto.id ? setSelected('') : setSelected(crypto.id)
+                  props.selected === crypto.id
+                    ? props.setSelected('')
+                    : props.setSelected(crypto.id)
                 }>
                 <CryptCard
                   key={crypto.id}
@@ -34,11 +23,9 @@ const CryptCards = () => {
                   name={crypto.name}
                   symbol={crypto.symbol}
                   image={`https://asset-images.messari.io/images/${crypto.id}/64.png?v=2`}
-                  price={crypto.priceUsd}
-                  change={
-                    crypto.percentChange24hs
-                  }
-                  onSelect={crypto.id === selected ? true : false}
+                  priceUsd={crypto.priceUsd}
+                  percentChange24hs={crypto.percentChange24hs}
+                  onSelect={crypto.id === props.selected ? true : false}
                 />
               </TouchableHighlight>
             );
@@ -46,5 +33,4 @@ const CryptCards = () => {
       </ListScrollView>
     </View>
   );
-};
 export default CryptCards;

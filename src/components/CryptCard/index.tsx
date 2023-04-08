@@ -1,6 +1,4 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
-import React, {useEffect, useMemo} from 'react';
-import crypto from '../../../metrics.json';
+import React, {useMemo} from 'react';
 import PercentChangeArrow from '../../../assets/icons/north_east_black_24dp.svg';
 import {
   ContainerRow,
@@ -14,19 +12,14 @@ import {
   ContainerCol,
   BackgroundView,
 } from './styles';
+import {CryptCardProps} from '../../../types';
+import {View} from 'react-native';
 
-type Props = {
-  image: string;
-  name: string;
-  price: number;
-  change: number;
-  id: string;
-  symbol: string;
-  onSelect: boolean;
-};
-
-const CryptCard = (props: Props) => {
+const CryptCard = (props: CryptCardProps) => {
   const percentageChange = (percentNumber: number) => {
+    if (percentNumber === null) {
+      return <View></View>
+    }
     const roundNumber = Number(percentNumber.toFixed(2));
     const negative = roundNumber < 0;
 
@@ -46,13 +39,13 @@ const CryptCard = (props: Props) => {
   };
 
   const memoCryptoPrice = useMemo(
-    () => Number(props.price.toFixed(2)),
-    [props.price],
+    () => Number(props.priceUsd.toFixed(2)),
+    [props.priceUsd],
   );
 
   const memoPercentageChange = useMemo(
-    () => percentageChange(props.change),
-    [props.change],
+    () => percentageChange(props.percentChange24hs),
+    [props.percentChange24hs],
   );
   return (
     <BackgroundView>
@@ -68,7 +61,7 @@ const CryptCard = (props: Props) => {
           <ColView>
             <RightColTextView>
               <ThemedText>${memoCryptoPrice}</ThemedText>
-              {memoPercentageChange}
+              <View>{memoPercentageChange}</View>
             </RightColTextView>
           </ColView>
         </ContainerRow>

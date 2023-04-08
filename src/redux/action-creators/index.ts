@@ -29,11 +29,6 @@ export const saveCrypto = (payload: string) => {
   return {type: ActionType.SAVE_CRYPTO, payload: payload};
 };
 
-// export const getAllCryptos = () => {
-// require("got")
-//   .get("https://data.messari.io/api/v2/assets")
-//   .json()
-//   .then((response: JSON) => {
-//     console.log(response);
-//   })
-//   .catch((err:string) => {console.log("Could not get cryptos from API:", err)});
+export const deleteCrypto = (payload: string) => {
+  return {type: ActionType.DELETE_CRYPTO, payload: payload};
+};

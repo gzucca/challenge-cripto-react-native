@@ -11,8 +11,6 @@ export const ContainerView = styled.View`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-self: center;
   background-color: ${({theme}) => theme.primary};
 `;
 

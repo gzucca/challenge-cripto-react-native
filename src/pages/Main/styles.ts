@@ -6,18 +6,31 @@ export const ComponentView = styled.View`
 `;
 
 export const HeaderView = styled.View`
-  padding: 50px 0px 40px;
+  padding: 50px 0px 0px;
   background-color: ${({theme}) => theme.blue};
 `;
 
-export const ContainerView = styled.View`
-  width: 90%;
+export const RowView = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  width: 100%
+`;
+
+export const ColumnView = styled.View`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
   align-self: center;
 `;
+
+export const TrashCanTouchable = styled.TouchableOpacity`
+  position: relative;
+  padding: 10px 0px 10px;
+`
 
 export const ListScrollView = styled.ScrollView`
   width: 100%;
