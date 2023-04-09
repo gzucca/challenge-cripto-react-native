@@ -3,21 +3,22 @@ import {Action} from '../actions/index';
 import {Dispatch} from 'redux';
 import axios from 'axios';
 import json from './../../../apiresponse.json';
+import { CryptoObject } from '../../../types';
 
 export const getAllCryptos = () => {
   return async function (dispatch: Dispatch<Action>) {
-  //   try {
-  //     const json = await axios.get(
-  //       `https://data.messari.io/api/v2/assets?limit=20`,
-  //     );
+    try {
+      const json = await axios.get(
+        `https://data.messari.io/api/v2/assets?limit=20`,
+      );
       return dispatch({
         type: ActionType.GET_ALL,
-        // payload: json.data.data,
         payload: json.data,
+        // payload: json,
       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -34,7 +35,7 @@ export const deleteCrypto = (cryptoId: string) => {
 };
 
 
-export const loadUserCrypto = (cryptoId: string) => {
+export const updateUserCrypto = (cryptoId: string) => {
   return async function (dispatch: Dispatch<Action>) {
     try {
       const json = await axios.get(
@@ -42,11 +43,15 @@ export const loadUserCrypto = (cryptoId: string) => {
       );
 
       return dispatch({
-        type: ActionType.LOAD_USER_CRYPTO,
-        payload: json.data.data,
+        type: ActionType.UPDATE_USER_CRYPTO,
+        payload: json.data,
       });
     } catch (error) {
-      console.log('Hubo un error al llamar a la API', error);
+      console.log( error);
     }
   };
+};
+
+export const loadUserCrypto = (crypto: CryptoObject) => {
+  return {type: ActionType.LOAD_USER_CRYPTO, payload: crypto};
 };

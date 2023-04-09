@@ -1,21 +1,22 @@
 import {CryptoObject, GlobalState} from '../../../types';
 import {ActionType} from '../action-types';
 import {Action} from '../actions/index';
-import { setUserCrypto} from '../../../asyncStorage';
+import {setUserCrypto} from '../../../asyncStorage';
 
 const initialState: GlobalState = {
   allCryptos: [],
   searchResult: [],
   userCryptos: [],
-  userCryptosIds: [],
 };
 
 const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case ActionType.GET_ALL:
       const cryptoArray: CryptoObject[] = [];
-      action.payload.forEach(crypto => {
+      const timeStamp = action.payload.status.timestamp;
+      action.payload.data.forEach((crypto: any) => {
         const newCrypto: CryptoObject = {
+          timeStamp: timeStamp,
           id: crypto.id,
           name: crypto.name,
           symbol: crypto.symbol,
@@ -25,6 +26,8 @@ const reducer = (state = initialState, action: Action) => {
         };
         cryptoArray.push(newCrypto);
       });
+
+      
 
       return {
         ...state,
@@ -36,9 +39,10 @@ const reducer = (state = initialState, action: Action) => {
         crypto =>
           action.payload !== '' &&
           crypto.name.includes(action.payload) &&
-          state.userCryptosIds.find(cryptoId => cryptoId === crypto.id) ===
+          state.userCryptos.find(userCrypto => userCrypto.id === crypto.id) ===
             undefined,
       );
+
       return {
         ...state,
         searchResult: cryptosFiltered,
@@ -50,53 +54,51 @@ const reducer = (state = initialState, action: Action) => {
       );
       const newUserCryptos = state.userCryptos;
       newUserCryptos.push(newCrypto as CryptoObject);
-      const newUserCryptosIds = state.userCryptosIds;
-      newUserCryptosIds.push(newCrypto?.id as string);
-      setUserCrypto(newUserCryptosIds);
+      setUserCrypto(newUserCryptos);
 
       return {
         ...state,
         userCryptos: newUserCryptos,
-        userCryptosIds: newUserCryptosIds,
       };
 
     case ActionType.DELETE_CRYPTO:
       const newUserCryptosWDeleted = state.userCryptos.filter(
         crypto => crypto.id !== action.payload,
       );
-      const newUserCryptosIdsWDeleted = state.userCryptosIds.filter(
-        cryptoId => cryptoId !== action.payload,
-      );
 
-      setUserCrypto(newUserCryptosIdsWDeleted);
+      setUserCrypto(newUserCryptosWDeleted);
 
       return {
         ...state,
         userCryptos: newUserCryptosWDeleted,
-        userCryptosIds: newUserCryptosIdsWDeleted,
       };
 
-    case ActionType.LOAD_USER_CRYPTO:
-
+    case ActionType.UPDATE_USER_CRYPTO:
       const loadedCryptoArray: CryptoObject[] = state.userCryptos;
-      const loadedCryptoArrayIds: string[] = state.userCryptosIds
-
-        const loadedCrypto: CryptoObject = {
-        id: action.payload.id,
-        name: action.payload.name,
-        symbol: action.payload.symbol,
-        priceUsd: action.payload.market_data.price_usd,
+      const timeStamp2 = action.payload.status.timestamp;
+      const newCrypto2: CryptoObject = {
+        timeStamp: timeStamp2,
+        id: action.payload.data.id,
+        name: action.payload.data.name,
+        symbol: action.payload.data.symbol,
+        priceUsd: action.payload.data.market_data.price_usd,
         percentChange24hs:
-          action.payload.market_data.percent_change_usd_last_24_hours,
+          action.payload.data.market_data.percent_change_usd_last_24_hours,
       };
-      loadedCryptoArray.push(loadedCrypto)
-      loadedCryptoArrayIds.push(loadedCrypto.id)
-    
+      loadedCryptoArray.push(newCrypto2);
 
       return {
         ...state,
         userCryptos: loadedCryptoArray,
-        userCryptosIds: loadedCryptoArrayIds,
+      };
+
+    case ActionType.LOAD_USER_CRYPTO:
+      const storeCryptos: CryptoObject[] = state.userCryptos;
+      storeCryptos.push(action.payload);
+
+      return {
+        ...state,
+        userCryptos: storeCryptos,
       };
 
     default:

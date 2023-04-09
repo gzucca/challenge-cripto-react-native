@@ -28,7 +28,11 @@ const Search = ({route, navigation}: Props) => {
   const [selected, setSelected] = useState('');
 
   useEffect(() => {
-    getAllCryptos();
+    const check = globalState.allCryptos.length === 0;
+    
+    if (check === true) {
+      getAllCryptos();
+    }
     return () => {
       searchCryptos('');
     };

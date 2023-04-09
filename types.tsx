@@ -4,6 +4,7 @@ export type RootStackParamList = {
 };
 
 export type CryptoObject = {
+  timeStamp: string;
   id: string;
   name: string;
   symbol: string;
@@ -15,7 +16,6 @@ export type GlobalState = {
   allCryptos: CryptoObject[];
   searchResult: CryptoObject[];
   userCryptos: CryptoObject[];
-  userCryptosIds: string[];
 };
 
 export type CryptCardProps = {

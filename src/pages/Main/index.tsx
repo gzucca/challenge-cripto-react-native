@@ -14,13 +14,15 @@ import {
   TrashCanTouchable,
   WarnText,
 } from './styles';
-import {RootStackParamList} from '../../../types';
+import {CryptoObject, RootStackParamList} from '../../../types';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useDispatch, useSelector} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators, State} from '../../redux';
 import TrashCanDelete from './../../../assets/icons/delete_black_24dp.svg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getAPITime, getCurrentTime} from '../../../getTime';
+import { updateUserCrypto } from '../../redux/action-creators';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -30,13 +32,21 @@ const Main = ({route, navigation}: Props) => {
   const dispatch = useDispatch();
   const {deleteCrypto} = bindActionCreators(actionCreators, dispatch);
   const {loadUserCrypto} = bindActionCreators(actionCreators, dispatch);
+  const {updateUserCrypto} = bindActionCreators(actionCreators, dispatch);
 
   const getUserCrypto = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('@storageUserCryptos');
       if (jsonValue !== null) {
         const storedArray = JSON.parse(jsonValue);
-        storedArray.forEach((crypto: string) => loadUserCrypto(crypto));
+        storedArray.forEach((crypto: CryptoObject) => {
+          const check = (getCurrentTime() === getAPITime(crypto.timeStamp));
+          if (check === false) {
+            updateUserCrypto(crypto.id)
+          } else {
+            loadUserCrypto(crypto);
+          }
+        });
       }
     } catch (e) {
       console.log(e);

@@ -1,8 +1,9 @@
+import { CryptoObject } from "../../../types"
 import { ActionType } from "../action-types"
 
 interface GetAllAction {
   type: ActionType.GET_ALL,
-  payload: Array<any>,
+  payload: any,
 }
 
 interface SearchCrypto {
@@ -20,9 +21,14 @@ interface DeleteCrytpo {
   payload: string,
 }
 
-interface LoadUserCrypto {
-  type: ActionType.LOAD_USER_CRYPTO,
+interface UpdateUserCrypto {
+  type: ActionType.UPDATE_USER_CRYPTO,
   payload: any,
 }
 
-export type Action = GetAllAction | SearchCrypto | SaveCrypto | DeleteCrytpo | LoadUserCrypto
+interface LoadUserCrypto {
+  type: ActionType.LOAD_USER_CRYPTO,
+  payload: CryptoObject,
+}
+
+export type Action = GetAllAction | SearchCrypto | SaveCrypto | DeleteCrytpo | UpdateUserCrypto | LoadUserCrypto
