@@ -20,6 +20,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators, State} from '../../redux';
 import TrashCanDelete from './../../../assets/icons/delete_black_24dp.svg';
+import { useTheme  } from 'styled-components'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {getAPITime, getCurrentTime} from '../../../getTime';
 import { updateUserCrypto } from '../../redux/action-creators';
@@ -27,6 +28,7 @@ import { updateUserCrypto } from '../../redux/action-creators';
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Main = ({route, navigation}: Props) => {
+  const theme = useTheme()
   const globalState = useSelector((state: State) => state.cryptos);
   const [selected, setSelected] = useState('');
   const dispatch = useDispatch();
@@ -71,7 +73,7 @@ const Main = ({route, navigation}: Props) => {
             <TrashCanDelete
               width={24}
               height={24}
-              fill={'white'}></TrashCanDelete>
+              fill={theme.white}></TrashCanDelete>
           </TrashCanTouchable>
         </ColumnView>
       </HeaderView>
@@ -88,7 +90,7 @@ const Main = ({route, navigation}: Props) => {
         <TouchableView>
           <TouchableHighlight
             onPress={() => navigation.navigate('Search')}
-            underlayColor={'grey'}>
+            underlayColor={theme.grey}>
             <TouchableText>+ Add a Cryptocurrency</TouchableText>
           </TouchableHighlight>
         </TouchableView>

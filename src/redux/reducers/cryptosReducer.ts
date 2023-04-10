@@ -37,8 +37,8 @@ const reducer = (state = initialState, action: Action) => {
     case ActionType.SEARCH_CRYPTO:
       const cryptosFiltered = state.allCryptos.filter(
         crypto =>
-          action.payload !== '' &&
-          crypto.name.includes(action.payload) &&
+          (crypto.name === action.payload ||
+            crypto.symbol === action.payload) &&
           state.userCryptos.find(userCrypto => userCrypto.id === crypto.id) ===
             undefined,
       );
@@ -49,9 +49,7 @@ const reducer = (state = initialState, action: Action) => {
       };
 
     case ActionType.SAVE_CRYPTO:
-      const newCrypto = state.allCryptos.find(
-        crypto => crypto.id === action.payload,
-      );
+      const newCrypto = state.searchResult[0];
       const newUserCryptos = state.userCryptos;
       newUserCryptos.push(newCrypto as CryptoObject);
       setUserCrypto(newUserCryptos);

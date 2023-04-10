@@ -26,8 +26,8 @@ export const searchCryptos = (cryptoName: string) => {
   return {type: ActionType.SEARCH_CRYPTO, payload: cryptoName};
 };
 
-export const saveCrypto = (cryptoId: string) => {
-  return {type: ActionType.SAVE_CRYPTO, payload: cryptoId};
+export const saveCrypto = () => {
+  return {type: ActionType.SAVE_CRYPTO};
 };
 
 export const deleteCrypto = (cryptoId: string) => {

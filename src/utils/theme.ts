@@ -8,7 +8,9 @@ const darkTheme: DefaultTheme = {
   red: 'red',
   blue: '#385775',
   yellow: '#fbd24d',
-  white: 'white'
+  white: 'white',
+  lightGrey: '#385775',
+  addInputGrey: '#FAFBFC',
 };
 
 const lightTheme: DefaultTheme = {
@@ -19,7 +21,9 @@ const lightTheme: DefaultTheme = {
   red: 'red',
   blue: '#385775',
   yellow: '#fbd24d',
-  white: 'white'
+  white: 'white',
+  lightGrey: '#385775',
+  addInputGrey: '#FAFBFC',
 };
 
 export {darkTheme, lightTheme};

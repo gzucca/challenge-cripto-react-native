@@ -12,5 +12,7 @@ declare module 'styled-components/native' {
       blue: string;
       yellow: string;
       white: string;
+      lightGrey: string;
+      addInputGrey: string;
   }
 }
