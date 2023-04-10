@@ -6,7 +6,6 @@ const initialState: GlobalState = {
   allCryptos: [],
   searchResult: [],
   userCryptos: [],
-  userCryptosIds: [],
 };
 
 const reducer = (state = initialState, action: Action) => {
@@ -33,43 +32,35 @@ const reducer = (state = initialState, action: Action) => {
     case ActionType.SEARCH_CRYPTO:
       const cryptosFiltered = state.allCryptos.filter(
         crypto =>
-          action.payload !== '' &&
-          crypto.name.includes(action.payload) &&
-          state.userCryptosIds.find(cryptoId => cryptoId === crypto.id) ===
+          (crypto.name === action.payload ||
+            crypto.symbol === action.payload) &&
+          state.userCryptos.find(userCrypto => userCrypto.id === crypto.id) ===
             undefined,
       );
+
       return {
         ...state,
         searchResult: cryptosFiltered,
       };
 
     case ActionType.SAVE_CRYPTO:
-      const newCrypto = state.allCryptos.find(
-        crypto => crypto.id === action.payload,
-      );
+      const newCrypto = state.searchResult[0];
       const newUserCryptos = state.userCryptos;
       newUserCryptos.push(newCrypto as CryptoObject);
-      const newUserCryptosIds = state.userCryptosIds;
-      newUserCryptosIds.push(newCrypto?.id as string);
 
       return {
         ...state,
         userCryptos: newUserCryptos,
-        userCryptosIds: newUserCryptosIds,
       };
 
     case ActionType.DELETE_CRYPTO:
       const newUserCryptosWDeleted = state.userCryptos.filter(
         crypto => crypto.id !== action.payload,
       );
-      const newUserCryptosIdsWDeleted = state.userCryptosIds.filter(
-        cryptoId => cryptoId !== action.payload,
-      );
 
       return {
         ...state,
         userCryptos: newUserCryptosWDeleted,
-        userCryptosIds: newUserCryptosIdsWDeleted,
       };
 
     default:

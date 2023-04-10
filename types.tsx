@@ -15,7 +15,6 @@ export type GlobalState = {
   allCryptos: CryptoObject[];
   searchResult: CryptoObject[];
   userCryptos: CryptoObject[];
-  userCryptosIds: string[];
 };
 
 export type CryptCardProps = {

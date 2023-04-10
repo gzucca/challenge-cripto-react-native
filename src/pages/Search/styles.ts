@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
 
 export const HeaderView = styled.View`
-  padding: 40px 20px 0px;
+  z-index: 10;
+  padding: 50px 20px 0px;
   color: ${({theme}) => theme.text};
   align-self: flex-start;
 `;
@@ -40,10 +41,16 @@ export const AddText = styled.Text`
   color: ${({theme}) => theme.text};
 `;
 
-export const AddTextInput = styled.TextInput`
-  border: 2px solid #fbd24d;
+type AddTextInputProps = {
+  focus: boolean;
+};
+export const AddTextInput = styled.TextInput<AddTextInputProps>`
+  border: 2px solid;
+  border-color: ${props =>
+    props.focus ? props.theme.yellow : props.theme.grey};
   border-radius: 4px;
-  background-color: ${({theme}) => theme.primary};
+  background-color: ${props =>
+    props.focus ? props.theme.primary : props.theme.addInputGrey};
   font-size: 16px;
   color: ${({theme}) => theme.text};
   padding: 8px 8px;
@@ -59,7 +66,8 @@ export const AddButton = styled.TouchableOpacity`
   align-self: flex-end;
 `;
 
-export const ButtonText = styled.Text`
-  color: ${({theme}) => theme.text};
+export const ButtonText = styled.Text<AddTextInputProps>`
+  opacity: ${props => (props.focus ? 1 : 0.2)};
+  color: ${({theme}) => theme.lightGrey};
   font-size: 16px;
 `;

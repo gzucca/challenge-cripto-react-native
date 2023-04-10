@@ -12,7 +12,6 @@ interface SearchCrypto {
 
 interface SaveCrypto {
   type: ActionType.SAVE_CRYPTO,
-  payload: string,
 }
 
 interface DeleteCrytpo {
