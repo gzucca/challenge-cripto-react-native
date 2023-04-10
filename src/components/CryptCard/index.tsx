@@ -1,6 +1,5 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
-import React, {useEffect, useMemo} from 'react';
-import crypto from '../../../metrics.json';
+import React, { useMemo} from 'react';
+
 import PercentChangeArrow from '../../../assets/icons/north_east_black_24dp.svg';
 import {
   ContainerView,
@@ -12,6 +11,7 @@ import {
   CryptImage,
   ThemedText,
 } from './styles';
+import { useTheme  } from 'styled-components'
 
 type Props = {
   image: string;
@@ -24,6 +24,7 @@ type Props = {
 };
 
 const CryptCard = (props: Props) => {
+  const theme = useTheme()
   const percentageChange = (percentNumber: number) => {
     const roundNumber = Number(percentNumber.toFixed(2));
     const negative = roundNumber < 0;
@@ -34,7 +35,7 @@ const CryptCard = (props: Props) => {
           width={16}
           height={16}
           rotation={negative ? 180 : 0}
-          fill={negative ? 'red' : 'green'}
+          fill={negative ? theme.red : theme.green}
         />
         <PercentChangeNumber negative={negative}>
           {(negative ? -roundNumber : roundNumber) + '%'}

@@ -17,6 +17,7 @@ import {
 } from './styles';
 import {RootStackParamList} from '../../../types';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { useTheme  } from 'styled-components'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Search'>;
 
@@ -27,7 +28,7 @@ const Search = ({route, navigation}: Props) => {
   const {saveCrypto} = bindActionCreators(actionCreators, dispatch);
   const globalState = useSelector((state: State) => state.cryptos);
   const [selected, setSelected] = useState('');
-
+  const theme = useTheme()
 
   useEffect(() => {
     getAllCryptos();
@@ -41,7 +42,7 @@ const Search = ({route, navigation}: Props) => {
       <HeaderView>
         <TouchableHighlight
           onPress={() => navigation.navigate('Home')}
-          underlayColor={'grey'}>
+          underlayColor={theme.grey}>
           <TouchableText>{'< Back to list'}</TouchableText>
         </TouchableHighlight>
       </HeaderView>
@@ -49,7 +50,7 @@ const Search = ({route, navigation}: Props) => {
         <AddText>Add a Cryptocurrency</AddText>
         <AddTextInput
           placeholder="Use a name or ticker symbol..."
-          placeholderTextColor="lightgrey"
+          placeholderTextColor={theme.grey}
           onChangeText={e => searchCryptos(e)}
         />
         <AddButton

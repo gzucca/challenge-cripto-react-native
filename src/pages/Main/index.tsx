@@ -13,10 +13,12 @@ import {
 } from './styles';
 import {RootStackParamList} from '../../../types';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { useTheme  } from 'styled-components'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Main = ({route, navigation}: Props) => {
+  const theme = useTheme()
   return (
     <ComponentView>
       <HeaderView>
@@ -30,7 +32,7 @@ const Main = ({route, navigation}: Props) => {
         <WarnText>No Cryptocurrency loaded</WarnText>
         <TouchableHighlight
           onPress={() => navigation.navigate('Search')}
-          underlayColor={'grey'}>
+          underlayColor={theme.grey}>
           <TouchableText>+ Add a Cryptocurrency</TouchableText>
         </TouchableHighlight>
       </ListScrollView>
