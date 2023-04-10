@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const PercentChangeView = styled.View`
   display: flex;
   flex-direction: row;
-  gap: 3px;
+  gap: 2.5px;
   align-items: center;
 `;
 
