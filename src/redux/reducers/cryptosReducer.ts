@@ -86,7 +86,8 @@ const reducer = (state = initialState, action: Action) => {
           action.payload.data.market_data.percent_change_usd_last_24_hours,
       };
       loadedCryptoArray.push(newCrypto2);
-
+      setUserCrypto(loadedCryptoArray);
+      
       return {
         ...state,
         userCryptos: loadedCryptoArray,

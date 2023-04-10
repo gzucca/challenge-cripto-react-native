@@ -41,6 +41,7 @@ const Main = ({route, navigation}: Props) => {
         const storedArray = JSON.parse(jsonValue);
         storedArray.forEach((crypto: CryptoObject) => {
           const check = (getCurrentTime() === getAPITime(crypto.timeStamp));
+
           if (check === false) {
             updateUserCrypto(crypto.id)
           } else {
