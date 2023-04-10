@@ -20,7 +20,6 @@ type Props = {
   change: number;
   id: string;
   symbol: string;
-  onSelect: boolean;
 };
 
 const CryptCard = (props: Props) => {
@@ -54,7 +53,7 @@ const CryptCard = (props: Props) => {
     [props.change],
   );
   return (
-    <ContainerView onSelect={props.onSelect} key={props.id}>
+    <ContainerView  key={props.id}>
       <ColView>
         <CryptImage source={{uri: props.image}}></CryptImage>
         <LeftColTextView>

@@ -13,11 +13,9 @@ export const PercentChangeNumber = styled.Text<{
   color: ${props => (props.negative ? props.theme.red : props.theme.green)};
 `;
 
-type ContainerProps = {
-  onSelect: boolean;
-};
 
-export const ContainerView = styled.View<ContainerProps>`
+
+export const ContainerView = styled.View`
   width: 100%;
   font-size: 16px;
   display: flex;
@@ -25,11 +23,10 @@ export const ContainerView = styled.View<ContainerProps>`
   justify-content: space-between;
   align-self: center;
   padding: 20px 0px;
-  border-color: ${props => (props.onSelect ? props.theme.yellow : props.theme.grey)};
+  border-color: ${({theme}) =>  theme.grey};
   border-bottom-width: 1px;
   border-style: solid;
-  background-color: ${props =>
-    props.onSelect ? props.theme.grey : props.theme.primary};
+  background-color: ${({theme}) => theme.primary};
 `;
 
 export const ColView = styled.View`
