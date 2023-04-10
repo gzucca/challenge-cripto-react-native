@@ -20,7 +20,8 @@ export const ContainerView = styled.View`
 `;
 
 export const ListScrollView = styled.ScrollView`
-  padding: 0px 10%;
+  width: 100%;
+  padding: 0px 10px;
   display: flex;
   align-self: center;
 `;
@@ -35,7 +36,7 @@ export const HeaderText = styled.Text`
   font-size: 20px;
   font-weight: 700;
   font-family: 'Inter-Medium';
-  color: ${({theme}) => theme.text};
+  color: ${({theme}) => theme.white};
 `;
 
 export const TouchableText = styled.Text`

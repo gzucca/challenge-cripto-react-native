@@ -8,6 +8,7 @@ const darkTheme: DefaultTheme = {
   red: 'red',
   blue: '#385775',
   yellow: '#fbd24d',
+  white: 'white',
 };
 
 const lightTheme: DefaultTheme = {
@@ -18,6 +19,7 @@ const lightTheme: DefaultTheme = {
   red: 'red',
   blue: '#385775',
   yellow: '#fbd24d',
+  white: 'white',
 };
 
 export {darkTheme, lightTheme};
