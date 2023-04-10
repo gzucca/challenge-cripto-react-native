@@ -14,8 +14,10 @@ import {
 } from './styles';
 import {CryptCardProps} from '../../../types';
 import {View} from 'react-native';
+import { useTheme  } from 'styled-components'
 
 const CryptCard = (props: CryptCardProps) => {
+  const theme = useTheme()
   const percentageChange = (percentNumber: number) => {
     if (percentNumber === null) {
       return <View></View>
@@ -29,7 +31,7 @@ const CryptCard = (props: CryptCardProps) => {
           width={16}
           height={16}
           rotation={negative ? 180 : 0}
-          fill={negative ? 'red' : 'green'}
+          fill={negative ? theme.red : theme.green}
         />
         <PercentChangeNumber negative={negative}>
           {(negative ? -roundNumber : roundNumber) + '%'}

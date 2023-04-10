@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const HeaderView = styled.View`
-  padding: 50px 20px 20px;
+  padding: 40px 20px 0px;
   color: ${({theme}) => theme.text};
   align-self: flex-start;
 `;
@@ -20,13 +20,17 @@ export const ListScrollView = styled.ScrollView`
 `;
 
 export const TouchableText = styled.Text`
-  color: ${({theme}) => theme.text};
+  color: ${({theme}) => theme.lightGrey};
   font-size: 16px;
   padding: 6px 8px;
 `;
 
 export const AddView = styled.View`
-  padding: 0px 24px;
+  position: absolute;
+  height: 100%;
+  width: 90%;
+  align-self: center;
+  justify-content: center;
 `;
 
 export const AddText = styled.Text`
