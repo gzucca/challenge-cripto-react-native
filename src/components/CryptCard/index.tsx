@@ -12,9 +12,10 @@ import {
   CryptImage,
   ThemedText,
 } from './styles';
-
+import { useTheme  } from 'styled-components'
 
 const CryptCard = () => {
+  const theme = useTheme()
   const percentageChange = (percentNumber: number) => {
     const roundNumber = Number(percentNumber.toFixed(2));
     const negative = roundNumber < 0;
@@ -26,7 +27,7 @@ const CryptCard = () => {
           width={16}
           height={16}
           rotation={negative ? 180 : 0}
-          fill={negative ? 'red' : 'green'}
+          fill={negative ? theme.red : theme.green}
           />
         <PercentChangeNumber negative={negative}>
           {(negative ? -roundNumber : roundNumber) + '%'}

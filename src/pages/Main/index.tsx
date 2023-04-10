@@ -17,10 +17,11 @@ import {
   TouchableText,
   WarnText,
 } from './styles';
+import { useTheme  } from 'styled-components'
 
 const Main = () => {
   const [open, setOpen] = useState(false);
-
+  const theme = useTheme()
   const toggleCards = () => {
     setOpen((open) => !open);
   };
@@ -40,7 +41,7 @@ const Main = () => {
         ) : (
           <WarnText>No Cryptocurrency loaded</WarnText>
         )}
-        <TouchableHighlight onPress={toggleCards} underlayColor={'grey'}>
+        <TouchableHighlight onPress={toggleCards} underlayColor={theme.grey}>
           <TouchableText>+ Add a Cryptocurrency</TouchableText>
         </TouchableHighlight>
       </ListScrollView>
