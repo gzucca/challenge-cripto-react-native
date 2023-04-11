@@ -30,7 +30,7 @@ export const ContainerRow = styled.View`
 export const PercentChangeView = styled.View`
   display: flex;
   flex-direction: row;
-  gap: 3px;
+  gap: 2.5px;
   align-items: center;
 `;
 
@@ -43,6 +43,21 @@ export const PercentChangeNumber = styled.Text<{
 type ContainerProps = {
   onSelect: boolean;
 };
+
+export const ContainerView = styled.View<ContainerProps>`
+  width: 100%;
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: center;
+  padding: 20px 0px;
+  border-color: ${props => (props.onSelect ? props.theme.yellow : props.theme.grey)};
+  border-bottom-width: 1px;
+  border-style: solid;
+  background-color: ${props =>
+    props.onSelect ? props.theme.grey : props.theme.primary};
+`;
 
 export const ColView = styled.View`
   display: flex;

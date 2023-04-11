@@ -34,6 +34,7 @@ export const TrashCanTouchable = styled.TouchableOpacity`
 
 export const ListScrollView = styled.ScrollView`
   width: 100%;
+  padding: 0px 10px;
   display: flex;
   align-self: center;
 `;
@@ -49,6 +50,7 @@ export const HeaderText = styled.Text`
   font-weight: 700;
   font-family: 'Inter-Medium';
   color: ${({theme}) => theme.white};
+  color: ${({theme}) => theme.white};
 `;
 
 export const TouchableText = styled.Text`
@@ -60,7 +62,7 @@ export const TouchableText = styled.Text`
 export const WarnText = styled.Text`
   font-size: 16px;
   font-weight: 600;
-  color: #ff6666;
+  color: ${({theme}) => theme.red};
   font-style: italic;
   text-align: center;
   padding: 30px 0px;

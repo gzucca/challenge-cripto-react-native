@@ -2,6 +2,15 @@ import {CryptoObject, GlobalState} from '../../../types';
 import {ActionType} from '../action-types';
 import {Action} from '../actions/index';
 
+type CryptoObject = {
+  timeStamp: string;
+  id: string;
+  name: string;
+  symbol: string;
+  priceUsd: number;
+  percentChange24hs: number;
+};
+
 const initialState: GlobalState = {
   allCryptos: [],
   searchResult: [],
@@ -12,8 +21,10 @@ const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case ActionType.GET_ALL:
       const cryptoArray: CryptoObject[] = [];
-      action.payload.forEach(crypto => {
+      const timeStamp = action.payload.status.timestamp;
+      action.payload.data.forEach((crypto: any) => {
         const newCrypto: CryptoObject = {
+          timeStamp: timeStamp,
           id: crypto.id,
           name: crypto.name,
           symbol: crypto.symbol,
@@ -28,6 +39,7 @@ const reducer = (state = initialState, action: Action) => {
         ...state,
         allCryptos: cryptoArray,
       };
+
 
     case ActionType.SEARCH_CRYPTO:
       const cryptosFiltered = state.allCryptos.filter(

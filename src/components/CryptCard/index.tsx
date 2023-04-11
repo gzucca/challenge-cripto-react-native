@@ -32,6 +32,7 @@ const CryptCard = (props: CryptCardProps) => {
           height={16}
           rotation={negative ? 180 : 0}
           fill={negative ? theme.red : theme.green}
+          fill={negative ? theme.red : theme.green}
         />
         <PercentChangeNumber negative={negative}>
           {(negative ? -roundNumber : roundNumber) + '%'}
