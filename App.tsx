@@ -2,10 +2,10 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {Provider} from 'react-redux';
 import {ThemeProvider} from 'styled-components/native';
-import {SafeAreaView, StatusBar} from 'react-native';
-
+import {StatusBar} from 'react-native';
 import {lightTheme, darkTheme} from './src/utils/theme';
 import Main from './src/pages/Main/index';
+import Search from './src/pages/Search/index';
 import {useColorScheme} from 'react-native';
 import {store} from './src/redux/store';
 import {NavigationContainer} from '@react-navigation/native';
@@ -33,6 +33,11 @@ function App(): JSX.Element {
               name="Home"
               component={Main}
               options={{animation: 'slide_from_left'}}
+            />
+            <Stack.Screen
+              name="Search"
+              component={Search}
+              options={{animation: 'slide_from_right'}}
             />
           </Stack.Navigator>
         </NavigationContainer>

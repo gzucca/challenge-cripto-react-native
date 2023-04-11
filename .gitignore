@@ -65,4 +65,3 @@ yarn-error.log
 apiresponse.json
 
 .env
-*.env

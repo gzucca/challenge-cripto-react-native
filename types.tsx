@@ -9,6 +9,7 @@ export type CryptoObject = {
   symbol: string;
   priceUsd: number;
   percentChange24hs: number;
+  timeStamp: string;
 };
 
 export type GlobalState = {

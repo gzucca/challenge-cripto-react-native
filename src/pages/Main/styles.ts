@@ -15,7 +15,7 @@ export const RowView = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 100%
+  width: 100%;
 `;
 
 export const ColumnView = styled.View`
@@ -30,7 +30,7 @@ export const ColumnView = styled.View`
 export const TrashCanTouchable = styled.TouchableOpacity`
   position: relative;
   padding: 10px 0px 10px;
-`
+`;
 
 export const ListScrollView = styled.ScrollView`
   width: 100%;
@@ -70,4 +70,4 @@ export const WarnText = styled.Text`
 
 export const TouchableView = styled.View`
   align-self: center;
-`
+`;

@@ -20,12 +20,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators, State} from '../../redux';
 import TrashCanDelete from './../../../assets/icons/delete_black_24dp.svg';
-import { useTheme  } from 'styled-components'
+import {useTheme} from 'styled-components';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Main = ({route, navigation}: Props) => {
-  const theme = useTheme()
+  const theme = useTheme();
   const globalState = useSelector((state: State) => state.cryptos);
   const [selected, setSelected] = useState('');
   const dispatch = useDispatch();

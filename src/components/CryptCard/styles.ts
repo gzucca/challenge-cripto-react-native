@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const BackgroundView = styled.View`
   width: 100%;
-  background-color: ${({theme})=> theme.primary};
+  background-color: ${({theme}) => theme.primary};
 `;
 
 export const ContainerCol = styled.View<ContainerProps>`
@@ -52,7 +52,8 @@ export const ContainerView = styled.View<ContainerProps>`
   justify-content: space-between;
   align-self: center;
   padding: 20px 0px;
-  border-color: ${props => (props.onSelect ? props.theme.yellow : props.theme.grey)};
+  border-color: ${props =>
+    props.onSelect ? props.theme.yellow : props.theme.grey};
   border-bottom-width: 1px;
   border-style: solid;
   background-color: ${props =>
