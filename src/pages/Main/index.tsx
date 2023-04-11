@@ -1,14 +1,8 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  TouchableHighlight,
-} from 'react-native';
+import {TouchableHighlight} from 'react-native';
 import React, {useState} from 'react';
 import CryptCards from '../../components/CryptCards';
 import {
+  ComponentView,
   ContainerView,
   HeaderImage,
   HeaderText,
@@ -17,17 +11,24 @@ import {
   TouchableText,
   WarnText,
 } from './styles';
+import {RootStackParamList} from '../../../types';
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import { useTheme  } from 'styled-components'
+import {useDispatch, useSelector} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {actionCreators, State} from '../../redux';
+import CryptCard from '../../components/CryptCard';
 
-const Main = () => {
-  const [open, setOpen] = useState(false);
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+const Main = ({route, navigation}: Props) => {
   const theme = useTheme()
-  const toggleCards = () => {
-    setOpen((open) => !open);
-  };
-
+  const dispatch = useDispatch();
+  const globalState = useSelector((state: State) => state.cryptos);
+  const [open, setOpen] = useState(false)
+  const {getAllCryptos} = bindActionCreators(actionCreators, dispatch);
   return (
-    <View>
+    <ComponentView>
       <HeaderView>
         <ContainerView>
           <HeaderText>CryptoTracker Pro</HeaderText>
@@ -36,16 +37,31 @@ const Main = () => {
         </ContainerView>
       </HeaderView>
       <ListScrollView>
-        {open ? (
-          <CryptCards></CryptCards>
-        ) : (
-          <WarnText>No Cryptocurrency loaded</WarnText>
-        )}
-        <TouchableHighlight onPress={toggleCards} underlayColor={theme.grey}>
+        {globalState.allCryptos.length === 0 ?
+        <WarnText>No Cryptocurrency loaded</WarnText> :
+          globalState.allCryptos.map((crypto: any) => {
+            return (
+                <CryptCard
+                  key={crypto.id}
+                  id={crypto.id}
+                  name={crypto.name}
+                  symbol={crypto.symbol}
+                  image={`https://asset-images.messari.io/images/${crypto.id}/64.png?v=2`}
+                  price={crypto.priceUsd}
+                  change={
+                    crypto.percentChange24hs
+                  }
+                />
+
+            );
+          })}
+        <TouchableHighlight
+          onPress={() => getAllCryptos()}
+          underlayColor={theme.grey}>
           <TouchableText>+ Add a Cryptocurrency</TouchableText>
         </TouchableHighlight>
       </ListScrollView>
-    </View>
+    </ComponentView>
   );
 };
 

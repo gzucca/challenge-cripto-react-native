@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const PercentChangeView = styled.View`
   display: flex;
   flex-direction: row;
-  gap: 3px;
+  gap: 2.5px;
   align-items: center;
 `;
 
@@ -13,6 +13,8 @@ export const PercentChangeNumber = styled.Text<{
   color: ${props => (props.negative ? props.theme.red : props.theme.green)};
 `;
 
+
+
 export const ContainerView = styled.View`
   width: 100%;
   font-size: 16px;
@@ -21,9 +23,10 @@ export const ContainerView = styled.View`
   justify-content: space-between;
   align-self: center;
   padding: 20px 0px;
-  border-color: ${({theme}) => theme.grey};
+  border-color: ${({theme}) =>  theme.grey};
   border-bottom-width: 1px;
   border-style: solid;
+  background-color: ${({theme}) => theme.primary};
 `;
 
 export const ColView = styled.View`
@@ -51,6 +54,5 @@ export const CryptImage = styled.Image`
 `;
 
 export const ThemedText = styled.Text`
-  color: ${({theme}) => theme.text};
-
-`
+  color: ${({theme}) => theme.text}
+  `;

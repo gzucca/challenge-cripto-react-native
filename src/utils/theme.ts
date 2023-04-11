@@ -3,11 +3,12 @@ import {DefaultTheme} from 'styled-components';
 const darkTheme: DefaultTheme = {
   primary: 'black',
   text: 'white',
-  grey: '#f5f5f5',
+  grey: 'rgba(192, 192, 192, 0.5)',
   green: 'green',
   red: 'red',
   blue: '#385775',
-  yellow: '#f3c30069',
+  yellow: '#fbd24d',
+  white: 'white',
 };
 
 const lightTheme: DefaultTheme = {
@@ -17,7 +18,8 @@ const lightTheme: DefaultTheme = {
   green: 'green',
   red: 'red',
   blue: '#385775',
-  yellow: '#ffc700',
+  yellow: '#fbd24d',
+  white: 'white',
 };
 
 export {darkTheme, lightTheme};

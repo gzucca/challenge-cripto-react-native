@@ -1,6 +1,5 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
-import React, {useMemo} from 'react';
-import crypto from '../../../metrics.json';
+import React, { useMemo} from 'react';
+
 import PercentChangeArrow from '../../../assets/icons/north_east_black_24dp.svg';
 import {
   ContainerView,
@@ -14,13 +13,21 @@ import {
 } from './styles';
 import { useTheme  } from 'styled-components'
 
-const CryptCard = () => {
+type Props = {
+  image: string;
+  name: string;
+  price: number;
+  change: number;
+  id: string;
+  symbol: string;
+};
+
+const CryptCard = (props: Props) => {
   const theme = useTheme()
   const percentageChange = (percentNumber: number) => {
     const roundNumber = Number(percentNumber.toFixed(2));
     const negative = roundNumber < 0;
-  
-    
+
     return (
       <PercentChangeView>
         <PercentChangeArrow
@@ -28,35 +35,30 @@ const CryptCard = () => {
           height={16}
           rotation={negative ? 180 : 0}
           fill={negative ? theme.red : theme.green}
-          />
+        />
         <PercentChangeNumber negative={negative}>
           {(negative ? -roundNumber : roundNumber) + '%'}
         </PercentChangeNumber>
       </PercentChangeView>
     );
   };
-  
+
   const memoCryptoPrice = useMemo(
-    () =>
-      Math.round((crypto.data.market_data.price_usd + Number.EPSILON) * 100) /
-      100,
-    [crypto.data.market_data.price_usd],
+    () => Number(props.price.toFixed(2)),
+    [props.price],
   );
-  
+
   const memoPercentageChange = useMemo(
-    () =>
-      percentageChange(
-        crypto.data.market_data.percent_change_usd_last_24_hours,
-      ),
-    [crypto.data.market_data.percent_change_usd_last_24_hours],
+    () => percentageChange(props.change),
+    [props.change],
   );
   return (
-    <ContainerView key={crypto.data.id}>
+    <ContainerView  key={props.id}>
       <ColView>
-        <CryptImage source={require('../../../assets/image.png')}></CryptImage>
+        <CryptImage source={{uri: props.image}}></CryptImage>
         <LeftColTextView>
-          <ThemedText>{crypto.data.name}</ThemedText>
-          <ThemedText>{crypto.data.symbol}</ThemedText>
+          <ThemedText>{props.name}</ThemedText>
+          <ThemedText>{props.symbol}</ThemedText>
         </LeftColTextView>
       </ColView>
       <ColView>
