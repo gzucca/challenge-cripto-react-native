@@ -47,9 +47,9 @@ const Main = ({route, navigation}: Props) => {
                   name={crypto.name}
                   symbol={crypto.symbol}
                   image={`https://asset-images.messari.io/images/${crypto.id}/64.png?v=2`}
-                  price={crypto.metrics.market_data.price_usd}
+                  price={crypto.priceUsd}
                   change={
-                    crypto.metrics.market_data.percent_change_usd_last_24_hours
+                    crypto.percentChange24hs
                   }
                 />
 

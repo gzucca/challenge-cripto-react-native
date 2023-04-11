@@ -2,7 +2,7 @@ import { ActionType } from "../action-types"
 
 interface GetAllAction {
   type: ActionType.GET_ALL,
-  payload: Array<any>,
+  payload: any,
 }
 
 interface SearchCrypto {
@@ -12,7 +12,6 @@ interface SearchCrypto {
 
 interface SaveCrypto {
   type: ActionType.SAVE_CRYPTO,
-  payload: string,
 }
 
 export type Action = GetAllAction | SearchCrypto | SaveCrypto

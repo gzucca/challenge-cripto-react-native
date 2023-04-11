@@ -48,7 +48,7 @@ export const TouchableText = styled.Text`
 export const WarnText = styled.Text`
   font-size: 16px;
   font-weight: 600;
-  color: #ff6666;
+  color: ${({theme}) => theme.red};
   font-style: italic;
   text-align: center;
   padding: 30px 0px;
