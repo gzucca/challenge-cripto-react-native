@@ -1,4 +1,4 @@
-import {TouchableHighlight, View} from 'react-native';
+import {SafeAreaView, TouchableHighlight, View} from 'react-native';
 import React, {useState} from 'react';
 import CryptCards from '../../components/CryptCards';
 import {
@@ -48,7 +48,7 @@ const Main = ({route, navigation}: Props) => {
           </TrashCanTouchable>
         </ColumnView>
       </HeaderView>
-      <ListScrollView>
+      <SafeAreaView>
         {globalState.userCryptos.length > 0 ? (
           <CryptCards
             setSelected={setSelected}
@@ -65,7 +65,7 @@ const Main = ({route, navigation}: Props) => {
             <TouchableText>+ Add a Cryptocurrency</TouchableText>
           </TouchableHighlight>
         </TouchableView>
-      </ListScrollView>
+      </SafeAreaView>
     </ComponentView>
   );
 };

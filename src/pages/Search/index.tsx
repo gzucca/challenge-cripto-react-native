@@ -36,7 +36,7 @@ const Search = ({route, navigation}: Props) => {
 
   const handleSaveCrypto = () => {
     const check = globalState.searchResult.length === 1;
-    if (check === true) {
+    if (check) {
       saveCrypto();
     } else {
       showAlert();
@@ -45,7 +45,6 @@ const Search = ({route, navigation}: Props) => {
 
   useEffect(() => {
     getAllCryptos();
-    return () => {};
   }, []);
 
   return (
