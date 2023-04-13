@@ -1,5 +1,5 @@
 import {SafeAreaView, TouchableHighlight, View} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import CryptCards from '../../components/CryptCards';
 import {
   ColumnView,
@@ -21,7 +21,6 @@ import {actionCreators, State} from '../../redux';
 import {useTheme} from 'styled-components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {getAPITime, getCurrentTime} from '../../../getTime';
-import { updateUserCrypto } from '../../redux/action-creators';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
