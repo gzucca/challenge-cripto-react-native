@@ -7,7 +7,6 @@ import {
   HeaderImage,
   HeaderText,
   HeaderView,
-  ListScrollView,
   RowView,
   TouchableText,
   TouchableView,
@@ -19,7 +18,6 @@ import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useDispatch, useSelector} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators, State} from '../../redux';
-import TrashCanDelete from './../../../assets/icons/delete_black_24dp.svg';
 import {useTheme} from 'styled-components';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
@@ -27,9 +25,6 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 const Main = ({route, navigation}: Props) => {
   const theme = useTheme();
   const globalState = useSelector((state: State) => state.cryptos);
-  const [selected, setSelected] = useState('');
-  const dispatch = useDispatch();
-  const {deleteCrypto} = bindActionCreators(actionCreators, dispatch);
 
   return (
     <ComponentView>
@@ -40,19 +35,11 @@ const Main = ({route, navigation}: Props) => {
             <HeaderImage
               source={require('../../../assets/profilePhoto.jpeg')}></HeaderImage>
           </RowView>
-          <TrashCanTouchable onPress={() => deleteCrypto(selected)}>
-            <TrashCanDelete
-              width={24}
-              height={24}
-              fill={theme.white}></TrashCanDelete>
-          </TrashCanTouchable>
         </ColumnView>
       </HeaderView>
       <SafeAreaView>
         {globalState.userCryptos.length > 0 ? (
           <CryptCards
-            setSelected={setSelected}
-            selected={selected}
             cryptosPassed={globalState.userCryptos}
           />
         ) : (

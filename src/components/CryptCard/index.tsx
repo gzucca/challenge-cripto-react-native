@@ -16,7 +16,7 @@ import {CryptCardProps} from '../../../types';
 import {View} from 'react-native';
 import {useTheme} from 'styled-components';
 
-const CryptCard = ({image, name, priceUsd, percentChange24hs, id, symbol, onSelect}: CryptCardProps) => {
+const CryptCard = ({image, name, priceUsd, percentChange24hs, id, symbol}: CryptCardProps) => {
   const theme = useTheme();
   const percentageChange = (percentNumber: number) => {
     if (percentNumber === null) {
@@ -51,7 +51,7 @@ const CryptCard = ({image, name, priceUsd, percentChange24hs, id, symbol, onSele
   );
   return (
     <BackgroundView>
-      <ContainerCol onSelect={onSelect} key={id}>
+      <ContainerCol key={id}>
         <ContainerRow>
           <ColView>
             <CryptImage source={{uri: image}}></CryptImage>

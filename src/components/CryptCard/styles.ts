@@ -5,7 +5,7 @@ export const BackgroundView = styled.View`
   background-color: ${({theme}) => theme.primary};
 `;
 
-export const ContainerCol = styled.View<ContainerProps>`
+export const ContainerCol = styled.View`
   font-size: 16px;
   display: flex;
   flex-direction: column;
@@ -13,12 +13,10 @@ export const ContainerCol = styled.View<ContainerProps>`
   align-self: center;
   padding: 20px 10px;
   width: 90%;
-  border-color: ${props =>
-    props.onSelect ? props.theme.yellow : props.theme.grey};
+  border-color: ${({theme}) => theme.grey};
   border-bottom-width: 1px;
   border-style: solid;
-  background-color: ${props =>
-    props.onSelect ? props.theme.grey : props.theme.primary};
+  background-color: ${({theme}) => theme.primary};
 `;
 
 export const ContainerRow = styled.View`
@@ -34,30 +32,12 @@ export const PercentChangeView = styled.View`
   align-items: center;
 `;
 
-export const PercentChangeNumber = styled.Text<{
+type PercentChangeNumberProps = {
   negative: boolean;
-}>`
-  color: ${props => (props.negative ? props.theme.red : props.theme.green)};
-`;
-
-type ContainerProps = {
-  onSelect: boolean;
 };
 
-export const ContainerView = styled.View<ContainerProps>`
-  width: 100%;
-  font-size: 16px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-self: center;
-  padding: 20px 0px;
-  border-color: ${props =>
-    props.onSelect ? props.theme.yellow : props.theme.grey};
-  border-bottom-width: 1px;
-  border-style: solid;
-  background-color: ${props =>
-    props.onSelect ? props.theme.grey : props.theme.primary};
+export const PercentChangeNumber = styled.Text<PercentChangeNumberProps>`
+  color: ${props => (props.negative ? props.theme.red : props.theme.green)};
 `;
 
 export const ColView = styled.View`

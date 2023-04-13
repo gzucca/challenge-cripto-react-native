@@ -25,11 +25,8 @@ export type CryptCardProps = {
   percentChange24hs: number;
   id: string;
   symbol: string;
-  onSelect: boolean;
 };
 
 export type CryptCardsProps = {
   cryptosPassed: CryptoObject[];
-  setSelected: Function;
-  selected: string;
 }

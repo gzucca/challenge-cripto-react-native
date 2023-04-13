@@ -6,7 +6,7 @@ export const ComponentView = styled.View`
 `;
 
 export const HeaderView = styled.View`
-  padding: 50px 0px 0px;
+  padding: 50px 0px;
   background-color: ${({theme}) => theme.blue};
 `;
 

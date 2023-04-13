@@ -11,6 +11,10 @@ import {store} from './src/redux/store';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList} from './types';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+
+
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -18,6 +22,7 @@ function App(): JSX.Element {
   const isDarkTheme = useColorScheme() === 'dark';
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <Provider store={store}>
         <StatusBar />
@@ -43,6 +48,7 @@ function App(): JSX.Element {
         </NavigationContainer>
       </Provider>
     </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
 
