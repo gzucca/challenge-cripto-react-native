@@ -1,4 +1,4 @@
-import {TouchableHighlight, View} from 'react-native';
+import {SafeAreaView, TouchableHighlight, View} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import CryptCards from '../../components/CryptCards';
 import {
@@ -7,7 +7,6 @@ import {
   HeaderImage,
   HeaderText,
   HeaderView,
-  ListScrollView,
   RowView,
   TouchableText,
   TouchableView,
@@ -19,8 +18,7 @@ import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useDispatch, useSelector} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators, State} from '../../redux';
-import TrashCanDelete from './../../../assets/icons/delete_black_24dp.svg';
-import { useTheme  } from 'styled-components'
+import {useTheme} from 'styled-components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {getAPITime, getCurrentTime} from '../../../getTime';
 import { updateUserCrypto } from '../../redux/action-creators';
@@ -28,11 +26,9 @@ import { updateUserCrypto } from '../../redux/action-creators';
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Main = ({route, navigation}: Props) => {
-  const theme = useTheme()
+  const theme = useTheme();
   const globalState = useSelector((state: State) => state.cryptos);
-  const [selected, setSelected] = useState('');
   const dispatch = useDispatch();
-  const {deleteCrypto} = bindActionCreators(actionCreators, dispatch);
   const {loadUserCrypto} = bindActionCreators(actionCreators, dispatch);
   const {updateUserCrypto} = bindActionCreators(actionCreators, dispatch);
 
@@ -69,19 +65,11 @@ const Main = ({route, navigation}: Props) => {
             <HeaderImage
               source={require('../../../assets/profilePhoto.jpeg')}></HeaderImage>
           </RowView>
-          <TrashCanTouchable onPress={() => deleteCrypto(selected)}>
-            <TrashCanDelete
-              width={24}
-              height={24}
-              fill={theme.white}></TrashCanDelete>
-          </TrashCanTouchable>
         </ColumnView>
       </HeaderView>
-      <ListScrollView>
+      <SafeAreaView>
         {globalState.userCryptos.length > 0 ? (
           <CryptCards
-            setSelected={setSelected}
-            selected={selected}
             cryptosPassed={globalState.userCryptos}
           />
         ) : (
@@ -94,7 +82,7 @@ const Main = ({route, navigation}: Props) => {
             <TouchableText>+ Add a Cryptocurrency</TouchableText>
           </TouchableHighlight>
         </TouchableView>
-      </ListScrollView>
+      </SafeAreaView>
     </ComponentView>
   );
 };

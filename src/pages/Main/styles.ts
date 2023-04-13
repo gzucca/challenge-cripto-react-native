@@ -6,7 +6,7 @@ export const ComponentView = styled.View`
 `;
 
 export const HeaderView = styled.View`
-  padding: 50px 0px 0px;
+  padding: 50px 0px;
   background-color: ${({theme}) => theme.blue};
 `;
 
@@ -15,7 +15,7 @@ export const RowView = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 100%
+  width: 100%;
 `;
 
 export const ColumnView = styled.View`
@@ -30,10 +30,11 @@ export const ColumnView = styled.View`
 export const TrashCanTouchable = styled.TouchableOpacity`
   position: relative;
   padding: 10px 0px 10px;
-`
+`;
 
 export const ListScrollView = styled.ScrollView`
   width: 100%;
+  padding: 0px 10px;
   display: flex;
   align-self: center;
 `;
@@ -49,6 +50,7 @@ export const HeaderText = styled.Text`
   font-weight: 700;
   font-family: 'Inter-Medium';
   color: ${({theme}) => theme.white};
+  color: ${({theme}) => theme.white};
 `;
 
 export const TouchableText = styled.Text`
@@ -60,7 +62,7 @@ export const TouchableText = styled.Text`
 export const WarnText = styled.Text`
   font-size: 16px;
   font-weight: 600;
-  color: #ff6666;
+  color: ${({theme}) => theme.red};
   font-style: italic;
   text-align: center;
   padding: 30px 0px;
@@ -68,4 +70,4 @@ export const WarnText = styled.Text`
 
 export const TouchableView = styled.View`
   align-self: center;
-`
+`;

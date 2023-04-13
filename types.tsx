@@ -4,12 +4,12 @@ export type RootStackParamList = {
 };
 
 export type CryptoObject = {
-  timeStamp: string;
   id: string;
   name: string;
   symbol: string;
   priceUsd: number;
   percentChange24hs: number;
+  timeStamp: string;
 };
 
 export type GlobalState = {
@@ -25,11 +25,8 @@ export type CryptCardProps = {
   percentChange24hs: number;
   id: string;
   symbol: string;
-  onSelect: boolean;
 };
 
 export type CryptCardsProps = {
   cryptosPassed: CryptoObject[];
-  setSelected: Function;
-  selected: string;
 }

@@ -1,36 +1,25 @@
-import {TouchableHighlight, View} from 'react-native';
+import {FlatList, ListRenderItem} from 'react-native';
 import React from 'react';
-import CryptCard from '../CryptCard';
-import {ListScrollView} from './styles';
 import {CryptCardsProps} from '../../../types';
+import {CryptoObject} from '../../../types';
+import ListItem from '../ListItem';
 
-const CryptCards = (props: CryptCardsProps) => (
-    <View>
-      <ListScrollView>
-        {props.cryptosPassed.length > 0 &&
-          props.cryptosPassed.map(crypto => {
-            return (
-              <TouchableHighlight
-                key={crypto.id}
-                onPress={() =>
-                  props.selected === crypto.id
-                    ? props.setSelected('')
-                    : props.setSelected(crypto.id)
-                }>
-                <CryptCard
-                  key={crypto.id}
-                  id={crypto.id}
-                  name={crypto.name}
-                  symbol={crypto.symbol}
-                  image={`https://asset-images.messari.io/images/${crypto.id}/64.png?v=2`}
-                  priceUsd={crypto.priceUsd}
-                  percentChange24hs={crypto.percentChange24hs}
-                  onSelect={crypto.id === props.selected ? true : false}
-                />
-              </TouchableHighlight>
-            );
-          })}
-      </ListScrollView>
-    </View>
+const CryptCards = ({
+  cryptosPassed,
+}: CryptCardsProps) => {
+
+
+
+  const renderItem: ListRenderItem<CryptoObject> = ({item}) => (
+    <ListItem data={item} />
   );
+
+  return (
+    <FlatList
+      data={cryptosPassed}
+      renderItem={renderItem}
+      keyExtractor={(item: CryptoObject) => item.id}
+    />
+  );
+};
 export default CryptCards;

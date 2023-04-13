@@ -2,7 +2,6 @@ import {ActionType} from '../action-types';
 import {Action} from '../actions/index';
 import {Dispatch} from 'redux';
 import axios from 'axios';
-import json from './../../../apiresponse.json';
 import { CryptoObject } from '../../../types';
 
 export const getAllCryptos = () => {
@@ -14,7 +13,6 @@ export const getAllCryptos = () => {
       return dispatch({
         type: ActionType.GET_ALL,
         payload: json.data,
-        // payload: json,
       });
     } catch (error) {
       console.log(error);

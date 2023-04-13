@@ -14,13 +14,13 @@ import {
 } from './styles';
 import {CryptCardProps} from '../../../types';
 import {View} from 'react-native';
-import { useTheme  } from 'styled-components'
+import {useTheme} from 'styled-components';
 
-const CryptCard = (props: CryptCardProps) => {
-  const theme = useTheme()
+const CryptCard = ({image, name, priceUsd, percentChange24hs, id, symbol}: CryptCardProps) => {
+  const theme = useTheme();
   const percentageChange = (percentNumber: number) => {
     if (percentNumber === null) {
-      return <View></View>
+      return <View/>;
     }
     const roundNumber = Number(percentNumber.toFixed(2));
     const negative = roundNumber < 0;
@@ -41,23 +41,23 @@ const CryptCard = (props: CryptCardProps) => {
   };
 
   const memoCryptoPrice = useMemo(
-    () => Number(props.priceUsd.toFixed(2)),
-    [props.priceUsd],
+    () => Number(priceUsd.toFixed(2)),
+    [priceUsd],
   );
 
   const memoPercentageChange = useMemo(
-    () => percentageChange(props.percentChange24hs),
-    [props.percentChange24hs],
+    () => percentageChange(percentChange24hs),
+    [percentChange24hs],
   );
   return (
     <BackgroundView>
-      <ContainerCol onSelect={props.onSelect} key={props.id}>
+      <ContainerCol key={id}>
         <ContainerRow>
           <ColView>
-            <CryptImage source={{uri: props.image}}></CryptImage>
+            <CryptImage source={{uri: image}}></CryptImage>
             <LeftColTextView>
-              <ThemedText>{props.name}</ThemedText>
-              <ThemedText>{props.symbol}</ThemedText>
+              <ThemedText>{name}</ThemedText>
+              <ThemedText>{symbol}</ThemedText>
             </LeftColTextView>
           </ColView>
           <ColView>

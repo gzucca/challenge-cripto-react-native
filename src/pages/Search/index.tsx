@@ -29,29 +29,22 @@ const Search = ({route, navigation}: Props) => {
   const [focus, setFocus] = useState(false);
 
   const showAlert = () =>
-  Alert.alert(
-    'No cryptocurrency found',
-    'Please enter the full name or ticker symbol. E.g.: "Bitcoin" or "BTC"',
-  );
+    Alert.alert(
+      'No cryptocurrency found',
+      'Please enter the full name or ticker symbol. E.g.: "Bitcoin" or "BTC"',
+    );
 
   const handleSaveCrypto = () => {
     const check = globalState.searchResult.length === 1;
-    if (check === true) {
+    if (check) {
       saveCrypto();
     } else {
-      showAlert()
+      showAlert();
     }
   };
 
   useEffect(() => {
-    const check = globalState.allCryptos.length === 0;
-    
-    if (check === true) {
-      getAllCryptos();
-    }
-    return () => {
-      searchCryptos('');
-    };
+    getAllCryptos();
   }, []);
 
   return (
