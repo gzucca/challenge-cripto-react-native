@@ -23,6 +23,10 @@ export const searchCryptos = (payload: string) => {
   return {type: ActionType.SEARCH_CRYPTO, payload: payload};
 };
 
-export const saveCrypto = (payload: string) => {
-  return {type: ActionType.SAVE_CRYPTO, payload: payload};
+export const saveCrypto = () => {
+  return {type: ActionType.SAVE_CRYPTO};
+};
+
+export const deleteCrypto = (payload: string) => {
+  return {type: ActionType.DELETE_CRYPTO, payload: payload};
 };

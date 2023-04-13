@@ -9,17 +9,21 @@ const darkTheme: DefaultTheme = {
   blue: '#385775',
   yellow: '#fbd24d',
   white: 'white',
+  lightGrey: '#385775',
+  addInputGrey: '#FAFBFC',
 };
 
 const lightTheme: DefaultTheme = {
   primary: 'white',
   text: 'black',
-  grey: '#696969',
+  grey: 'lightgrey',
   green: 'green',
   red: 'red',
   blue: '#385775',
   yellow: '#fbd24d',
   white: 'white',
+  lightGrey: '#385775',
+  addInputGrey: '#FAFBFC',
 };
 
 export {darkTheme, lightTheme};

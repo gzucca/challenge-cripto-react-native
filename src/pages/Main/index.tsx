@@ -1,66 +1,58 @@
-import {TouchableHighlight} from 'react-native';
+import {SafeAreaView, TouchableHighlight, View} from 'react-native';
 import React, {useState} from 'react';
 import CryptCards from '../../components/CryptCards';
 import {
+  ColumnView,
   ComponentView,
-  ContainerView,
   HeaderImage,
   HeaderText,
   HeaderView,
-  ListScrollView,
+  RowView,
   TouchableText,
+  TouchableView,
+  TrashCanTouchable,
   WarnText,
 } from './styles';
 import {RootStackParamList} from '../../../types';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import { useTheme  } from 'styled-components'
 import {useDispatch, useSelector} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators, State} from '../../redux';
-import CryptCard from '../../components/CryptCard';
+import {useTheme} from 'styled-components';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Main = ({route, navigation}: Props) => {
-  const theme = useTheme()
-  const dispatch = useDispatch();
+  const theme = useTheme();
   const globalState = useSelector((state: State) => state.cryptos);
-  const [open, setOpen] = useState(false)
-  const {getAllCryptos} = bindActionCreators(actionCreators, dispatch);
+
   return (
     <ComponentView>
       <HeaderView>
-        <ContainerView>
-          <HeaderText>CryptoTracker Pro</HeaderText>
-          <HeaderImage
-            source={require('../../../assets/profilePhoto.jpeg')}></HeaderImage>
-        </ContainerView>
+        <ColumnView>
+          <RowView>
+            <HeaderText>CryptoTracker Pro</HeaderText>
+            <HeaderImage
+              source={require('../../../assets/profilePhoto.jpeg')}></HeaderImage>
+          </RowView>
+        </ColumnView>
       </HeaderView>
-      <ListScrollView>
-        {globalState.allCryptos.length === 0 ?
-        <WarnText>No Cryptocurrency loaded</WarnText> :
-          globalState.allCryptos.map((crypto: any) => {
-            return (
-                <CryptCard
-                  key={crypto.id}
-                  id={crypto.id}
-                  name={crypto.name}
-                  symbol={crypto.symbol}
-                  image={`https://asset-images.messari.io/images/${crypto.id}/64.png?v=2`}
-                  price={crypto.priceUsd}
-                  change={
-                    crypto.percentChange24hs
-                  }
-                />
-
-            );
-          })}
-        <TouchableHighlight
-          onPress={() => getAllCryptos()}
-          underlayColor={theme.grey}>
-          <TouchableText>+ Add a Cryptocurrency</TouchableText>
-        </TouchableHighlight>
-      </ListScrollView>
+      <SafeAreaView>
+        {globalState.userCryptos.length > 0 ? (
+          <CryptCards
+            cryptosPassed={globalState.userCryptos}
+          />
+        ) : (
+          <WarnText>No Cryptocurrency loaded</WarnText>
+        )}
+        <TouchableView>
+          <TouchableHighlight
+            onPress={() => navigation.navigate('Search')}
+            underlayColor={theme.grey}>
+            <TouchableText>+ Add a Cryptocurrency</TouchableText>
+          </TouchableHighlight>
+        </TouchableView>
+      </SafeAreaView>
     </ComponentView>
   );
 };

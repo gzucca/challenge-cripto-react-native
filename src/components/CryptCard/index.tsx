@@ -1,8 +1,7 @@
-import React, { useMemo} from 'react';
-
+import React, {useMemo} from 'react';
 import PercentChangeArrow from '../../../assets/icons/north_east_black_24dp.svg';
 import {
-  ContainerView,
+  ContainerRow,
   PercentChangeNumber,
   PercentChangeView,
   ColView,
@@ -10,21 +9,19 @@ import {
   RightColTextView,
   CryptImage,
   ThemedText,
+  ContainerCol,
+  BackgroundView,
 } from './styles';
-import { useTheme  } from 'styled-components'
+import {CryptCardProps} from '../../../types';
+import {View} from 'react-native';
+import {useTheme} from 'styled-components';
 
-type Props = {
-  image: string;
-  name: string;
-  price: number;
-  change: number;
-  id: string;
-  symbol: string;
-};
-
-const CryptCard = (props: Props) => {
-  const theme = useTheme()
+const CryptCard = ({image, name, priceUsd, percentChange24hs, id, symbol}: CryptCardProps) => {
+  const theme = useTheme();
   const percentageChange = (percentNumber: number) => {
+    if (percentNumber === null) {
+      return <View/>;
+    }
     const roundNumber = Number(percentNumber.toFixed(2));
     const negative = roundNumber < 0;
 
@@ -44,30 +41,34 @@ const CryptCard = (props: Props) => {
   };
 
   const memoCryptoPrice = useMemo(
-    () => Number(props.price.toFixed(2)),
-    [props.price],
+    () => Number(priceUsd.toFixed(2)),
+    [priceUsd],
   );
 
   const memoPercentageChange = useMemo(
-    () => percentageChange(props.change),
-    [props.change],
+    () => percentageChange(percentChange24hs),
+    [percentChange24hs],
   );
   return (
-    <ContainerView  key={props.id}>
-      <ColView>
-        <CryptImage source={{uri: props.image}}></CryptImage>
-        <LeftColTextView>
-          <ThemedText>{props.name}</ThemedText>
-          <ThemedText>{props.symbol}</ThemedText>
-        </LeftColTextView>
-      </ColView>
-      <ColView>
-        <RightColTextView>
-          <ThemedText>${memoCryptoPrice}</ThemedText>
-          {memoPercentageChange}
-        </RightColTextView>
-      </ColView>
-    </ContainerView>
+    <BackgroundView>
+      <ContainerCol key={id}>
+        <ContainerRow>
+          <ColView>
+            <CryptImage source={{uri: image}}></CryptImage>
+            <LeftColTextView>
+              <ThemedText>{name}</ThemedText>
+              <ThemedText>{symbol}</ThemedText>
+            </LeftColTextView>
+          </ColView>
+          <ColView>
+            <RightColTextView>
+              <ThemedText>${memoCryptoPrice}</ThemedText>
+              <View>{memoPercentageChange}</View>
+            </RightColTextView>
+          </ColView>
+        </ContainerRow>
+      </ContainerCol>
+    </BackgroundView>
   );
 };
 

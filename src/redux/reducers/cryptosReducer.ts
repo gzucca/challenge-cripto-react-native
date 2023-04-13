@@ -1,22 +1,8 @@
+import {CryptoObject, GlobalState} from '../../../types';
 import {ActionType} from '../action-types';
 import {Action} from '../actions/index';
 
-type CryptoObject = {
-  timeStamp: string;
-  id: string;
-  name: string;
-  symbol: string;
-  priceUsd: number;
-  percentChange24hs: number;
-};
-
-type globalState = {
-  allCryptos: CryptoObject[];
-  searchResult: CryptoObject[];
-  userCryptos: CryptoObject[];
-};
-
-const initialState: globalState = {
+const initialState: GlobalState = {
   allCryptos: [],
   searchResult: [],
   userCryptos: [],
@@ -45,18 +31,39 @@ const reducer = (state = initialState, action: Action) => {
         allCryptos: cryptoArray,
       };
 
-
     case ActionType.SEARCH_CRYPTO:
-      const cryptosFilterd = state.allCryptos.filter(
-        (crypto: any) =>
-          action.payload !== '' && crypto.name.includes(action.payload),
+      const cryptosFiltered = state.allCryptos.filter(
+        crypto =>
+          (crypto.name === action.payload ||
+            crypto.symbol === action.payload) &&
+          state.userCryptos.find(userCrypto => userCrypto.id === crypto.id) ===
+            undefined,
       );
+
       return {
         ...state,
-        searchResult: cryptosFilterd,
+        searchResult: cryptosFiltered,
       };
 
+    case ActionType.SAVE_CRYPTO:
+      const newCrypto = state.searchResult[0];
+      const newUserCryptos = state.userCryptos;
+      newUserCryptos.push(newCrypto as CryptoObject);
 
+      return {
+        ...state,
+        userCryptos: newUserCryptos,
+      };
+
+    case ActionType.DELETE_CRYPTO:
+      const newUserCryptosWDeleted = state.userCryptos.filter(
+        crypto => crypto.id !== action.payload,
+      );
+
+      return {
+        ...state,
+        userCryptos: newUserCryptosWDeleted,
+      };
 
     default:
       return state;

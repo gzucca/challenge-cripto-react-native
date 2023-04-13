@@ -14,4 +14,9 @@ interface SaveCrypto {
   type: ActionType.SAVE_CRYPTO,
 }
 
-export type Action = GetAllAction | SearchCrypto | SaveCrypto
+interface DeleteCrytpo {
+  type: ActionType.DELETE_CRYPTO,
+  payload: string,
+}
+
+export type Action = GetAllAction | SearchCrypto | SaveCrypto | DeleteCrytpo
