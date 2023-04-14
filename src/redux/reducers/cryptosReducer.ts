@@ -27,8 +27,6 @@ const reducer = (state = initialState, action: Action) => {
         cryptoArray.push(newCrypto);
       });
 
-      
-
       return {
         ...state,
         allCryptos: cryptoArray,
@@ -73,9 +71,9 @@ const reducer = (state = initialState, action: Action) => {
 
     case ActionType.UPDATE_USER_CRYPTO:
       const loadedCryptoArray: CryptoObject[] = state.userCryptos;
-      const timeStamp2 = action.payload.status.timestamp;
-      const newCrypto2: CryptoObject = {
-        timeStamp: timeStamp2,
+      const timeStampUpdated = action.payload.status.timestamp;
+      const newCryptoUpdated: CryptoObject = {
+        timeStamp: timeStampUpdated,
         id: action.payload.data.id,
         name: action.payload.data.name,
         symbol: action.payload.data.symbol,
@@ -83,9 +81,9 @@ const reducer = (state = initialState, action: Action) => {
         percentChange24hs:
           action.payload.data.market_data.percent_change_usd_last_24_hours,
       };
-      loadedCryptoArray.push(newCrypto2);
+      loadedCryptoArray.push(newCryptoUpdated);
       setUserCrypto(loadedCryptoArray);
-      
+
       return {
         ...state,
         userCryptos: loadedCryptoArray,

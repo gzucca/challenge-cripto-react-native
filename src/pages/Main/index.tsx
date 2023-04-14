@@ -1,5 +1,5 @@
 import {SafeAreaView, TouchableHighlight, View} from 'react-native';
-import React, { useEffect} from 'react';
+import React, {useEffect} from 'react';
 import CryptCards from '../../components/CryptCards';
 import {
   ColumnView,
@@ -34,20 +34,20 @@ const Main = ({route, navigation}: Props) => {
   const getUserCrypto = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('@storageUserCryptos');
-      if (jsonValue !== null) {
+      if (jsonValue) {
         const storedArray = JSON.parse(jsonValue);
         storedArray.forEach((crypto: CryptoObject) => {
-          const check = (getCurrentTime() === getAPITime(crypto.timeStamp));
+          const check = getCurrentTime() === getAPITime(crypto.timeStamp);
 
           if (check === false) {
-            updateUserCrypto(crypto.id)
+            updateUserCrypto(crypto.id);
           } else {
             loadUserCrypto(crypto);
           }
         });
       }
     } catch (e) {
-      console.log(e);
+      throw e;
     }
   };
 
@@ -68,9 +68,7 @@ const Main = ({route, navigation}: Props) => {
       </HeaderView>
       <SafeAreaView>
         {globalState.userCryptos.length > 0 ? (
-          <CryptCards
-            cryptosPassed={globalState.userCryptos}
-          />
+          <CryptCards cryptosPassed={globalState.userCryptos} />
         ) : (
           <WarnText>No Cryptocurrency loaded</WarnText>
         )}

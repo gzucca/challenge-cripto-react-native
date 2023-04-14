@@ -14,8 +14,8 @@ export const getAllCryptos = () => {
         type: ActionType.GET_ALL,
         payload: json.data,
       });
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      throw e;
     }
   };
 };
@@ -44,8 +44,8 @@ export const updateUserCrypto = (cryptoId: string) => {
         type: ActionType.UPDATE_USER_CRYPTO,
         payload: json.data,
       });
-    } catch (error) {
-      console.log( error);
+    } catch (e) {
+      throw e;
     }
   };
 };

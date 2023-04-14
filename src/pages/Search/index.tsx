@@ -34,10 +34,7 @@ const Search = ({route, navigation}: Props) => {
       'Please enter the full name or ticker symbol. E.g.: "Bitcoin" or "BTC"',
     );
 
-    const showAlertSaved = () =>
-    Alert.alert(
-      '', 'Cryptocurrency added'
-    );
+  const showAlertSaved = () => Alert.alert('', 'Cryptocurrency added');
 
   const handleSaveCrypto = () => {
     const check = globalState.searchResult.length === 1;
