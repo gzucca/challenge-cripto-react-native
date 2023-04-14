@@ -1,5 +1,5 @@
 import {SafeAreaView, TouchableHighlight, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import CryptCards from '../../components/CryptCards';
 import {
   ColumnView,
@@ -13,18 +13,47 @@ import {
   TrashCanTouchable,
   WarnText,
 } from './styles';
-import {RootStackParamList} from '../../../types';
+import {CryptoObject, RootStackParamList} from '../../../types';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useDispatch, useSelector} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators, State} from '../../redux';
 import {useTheme} from 'styled-components';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getAPITime, getCurrentTime} from '../../../getTime';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Main = ({route, navigation}: Props) => {
   const theme = useTheme();
   const globalState = useSelector((state: State) => state.cryptos);
+  const dispatch = useDispatch();
+  const {loadUserCrypto} = bindActionCreators(actionCreators, dispatch);
+  const {updateUserCrypto} = bindActionCreators(actionCreators, dispatch);
+
+  const getUserCrypto = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@storageUserCryptos');
+      if (jsonValue) {
+        const storedArray = JSON.parse(jsonValue);
+        storedArray.forEach((crypto: CryptoObject) => {
+          const check = getCurrentTime() === getAPITime(crypto.timeStamp);
+
+          if (check === false) {
+            updateUserCrypto(crypto.id);
+          } else {
+            loadUserCrypto(crypto);
+          }
+        });
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  useEffect(() => {
+    getUserCrypto();
+  }, []);
 
   return (
     <ComponentView>
@@ -39,9 +68,7 @@ const Main = ({route, navigation}: Props) => {
       </HeaderView>
       <SafeAreaView>
         {globalState.userCryptos.length > 0 ? (
-          <CryptCards
-            cryptosPassed={globalState.userCryptos}
-          />
+          <CryptCards cryptosPassed={globalState.userCryptos} />
         ) : (
           <WarnText>No Cryptocurrency loaded</WarnText>
         )}

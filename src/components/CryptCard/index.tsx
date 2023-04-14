@@ -16,11 +16,18 @@ import {CryptCardProps} from '../../../types';
 import {View} from 'react-native';
 import {useTheme} from 'styled-components';
 
-const CryptCard = ({image, name, priceUsd, percentChange24hs, id, symbol}: CryptCardProps) => {
+const CryptCard = ({
+  image,
+  name,
+  priceUsd,
+  percentChange24hs,
+  id,
+  symbol,
+}: CryptCardProps) => {
   const theme = useTheme();
   const percentageChange = (percentNumber: number) => {
-    if (percentNumber === null) {
-      return <View/>;
+    if (!percentNumber) {
+      return <View />;
     }
     const roundNumber = Number(percentNumber.toFixed(2));
     const negative = roundNumber < 0;

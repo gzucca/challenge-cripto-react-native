@@ -1,3 +1,4 @@
+import { CryptoObject } from "../../../types"
 import { ActionType } from "../action-types"
 
 interface GetAllAction {
@@ -19,4 +20,14 @@ interface DeleteCrytpo {
   payload: string,
 }
 
-export type Action = GetAllAction | SearchCrypto | SaveCrypto | DeleteCrytpo
+interface UpdateUserCrypto {
+  type: ActionType.UPDATE_USER_CRYPTO,
+  payload: any,
+}
+
+interface LoadUserCrypto {
+  type: ActionType.LOAD_USER_CRYPTO,
+  payload: CryptoObject,
+}
+
+export type Action = GetAllAction | SearchCrypto | SaveCrypto | DeleteCrytpo | UpdateUserCrypto | LoadUserCrypto

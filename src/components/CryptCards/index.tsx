@@ -4,12 +4,7 @@ import {CryptCardsProps} from '../../../types';
 import {CryptoObject} from '../../../types';
 import ListItem from '../ListItem';
 
-const CryptCards = ({
-  cryptosPassed,
-}: CryptCardsProps) => {
-
-
-
+const CryptCards = ({cryptosPassed}: CryptCardsProps) => {
   const renderItem: ListRenderItem<CryptoObject> = ({item}) => (
     <ListItem data={item} />
   );

@@ -3,10 +3,9 @@ import CryptCard from '../CryptCard';
 import {Animated} from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {AnimatedIcon, DeleteButton} from './styles';
-import {useDispatch,} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators} from '../../redux';
-
 
 const renderLeftActions = (
   _progress: Animated.AnimatedInterpolation<number>,
@@ -27,20 +26,14 @@ const renderLeftActions = (
   );
 };
 
-const ListItem = ({
-  data,
-  selected,
-  handleSelected,
-}: {
-  data: CryptoObject;
-  selected: string;
-  handleSelected: Function;
-}) => {
+const ListItem = ({data}: {data: CryptoObject}) => {
   const dispatch = useDispatch();
   const {deleteCrypto} = bindActionCreators(actionCreators, dispatch);
-  
+
   return (
-  <Swipeable renderRightActions={renderLeftActions} onSwipeableOpen={() => deleteCrypto(data.id)}>
+    <Swipeable
+      renderRightActions={renderLeftActions}
+      onSwipeableOpen={() => deleteCrypto(data.id)}>
       <CryptCard
         key={data.id}
         id={data.id}
@@ -49,9 +42,9 @@ const ListItem = ({
         image={`https://asset-images.messari.io/images/${data.id}/64.png?v=2`}
         priceUsd={data.priceUsd}
         percentChange24hs={data.percentChange24hs}
- 
       />
-  </Swipeable>
-);}
+    </Swipeable>
+  );
+};
 
 export default ListItem;

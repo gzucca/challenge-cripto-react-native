@@ -11,10 +11,7 @@ import {store} from './src/redux/store';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList} from './types';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
-
-
+import {GestureHandlerRoot} from './styles';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -22,33 +19,33 @@ function App(): JSX.Element {
   const isDarkTheme = useColorScheme() === 'dark';
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-    <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
-      <Provider store={store}>
-        <StatusBar />
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="Home"
-            screenOptions={{
-              headerShown: false,
-              statusBarColor: 'transparent',
-              statusBarTranslucent: true,
-            }}>
-            <Stack.Screen
-              name="Home"
-              component={Main}
-              options={{animation: 'slide_from_left'}}
-            />
-            <Stack.Screen
-              name="Search"
-              component={Search}
-              options={{animation: 'slide_from_right'}}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </Provider>
-    </ThemeProvider>
-    </GestureHandlerRootView>
+    <GestureHandlerRoot>
+      <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+        <Provider store={store}>
+          <StatusBar />
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="Home"
+              screenOptions={{
+                headerShown: false,
+                statusBarColor: 'transparent',
+                statusBarTranslucent: true,
+              }}>
+              <Stack.Screen
+                name="Home"
+                component={Main}
+                options={{animation: 'slide_from_left'}}
+              />
+              <Stack.Screen
+                name="Search"
+                component={Search}
+                options={{animation: 'slide_from_right'}}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </Provider>
+      </ThemeProvider>
+    </GestureHandlerRoot>
   );
 }
 
